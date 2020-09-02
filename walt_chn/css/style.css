@@ -1,0 +1,97 @@
+
+
+.table-hover{
+    cursor: pointer;
+}
+row{margin:5px;border:0;padding:0;}
+
+
+div{
+    text-align:center;
+
+}
+.div_m{
+    overflow:auto;
+
+}
+.div_m>.div1{
+    float:left;
+    width:30%;
+    font-size: 20px;
+    font-weight: bold;}
+.div_m>.div2{
+    float:left;
+    width:30%;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+.div_m>.div3{
+    float:left;
+    width:30%;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.div_p{
+    overflow:auto;
+
+}
+.div_p>.div1{
+    float:left;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: left;
+}
+.div_p>.div2{
+    float:right;
+
+    font-size: 17px;
+    font-weight: bold;
+    text-align: left;
+}
+h3 {
+    color: #e315fa;
+    border-bottom:1px solid #CCC;
+}
+
+
+tbody tr:hover.selected td,
+tbody tr:hover td {
+    background-color: #c6ffd0;
+    cursor: pointer;
+}
+tbody tr.selected td {
+    background-color: #ffd659;
+}
+
+.button{
+    border: 0px;
+    background-color: deepskyblue;
+    color: white;
+    padding: 5px 15px;
+    margin-left: 10px;
+}
+
+.btn-twinkle{
+    font-size: 20px;
+    animation: twinkle 0.5s alternate infinite;
+}
+@keyframes twinkle{
+    from{color: #eb162f;}
+    to{color: #a3c6ca;}
+}
+html,body{
+    background: url("../image/bg.png") no-repeat;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    color: #d6920c
+}
+
+
+.link-top {
+    width: 100%;
+    height: 1px;
+    border-top: solid #ACC0D8 1px;
+}

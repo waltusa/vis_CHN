@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="js/library/echarts.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script type="text/javascript" src="js/real_stop_table.js"></script>
+    <script type="text/javascript" src="js/real_machine_status.js"></script>
+    <script type="text/javascript" src="js/log_table.js"></script>
+
+
+</head>
+<body>
+
+
+
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-sm">
+                <span class="con"></span>
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link"  href="realTime.html"><h5>实时监控</h5></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><h5>数据库查询</h5></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="QC_form.html"><h5>质量预检</h5></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm">
+                <br>
+                <h3 id="update_time">更新时间:</h3 >
+            </div>
+            <div class="col-sm"></div>
+        </div>
+
+    <div class = 'row'>
+        <div class="col-sm" >
+            <table class="table table-hover " id="error_result_shifts" >
+                <thead>
+                <tr>
+                    <th style="font-size:14px; color: cornflowerblue">ID</th>
+                    <th style="font-size:14px; color: cornflowerblue">故障码</th>
+                    <th style="font-size:14px; color: cornflowerblue">时间</th>
+                    <th style="font-size:14px; color: cornflowerblue">故障描述</th>
+                </tr>
+                <tbody id="realTime_error_body" style="font-size:14px; color: red">
+                </tbody>
+            </table>
+            <div id="error_result_bar" style="width:98%; height:400px; "></div>
+            <div id="error_machine_bar" style="width:98%; height:220px;"></div>
+
+        </div>
+
+        <div class="col-sm">
+
+            <div class="div_m">
+                <div class="div1" style="color:#00ff40" id = 'run'>
+                </div>
+                <div class="div2" style="color: red" id = 'fix'>
+                </div>
+                <div class="div3" style="color: #FFC300" id="off">
+                </div>
+            </div>
+
+            <div id = 'machine'></div>
+            <div id="machine_efficiency" style="width:98%; height:350px;"></div>
+            <div id="product_style_chart" style="width:98%; height:250px;"></div>
+
+
+        </div>
+        <div class="col-sm">
+            <h5 style="color: #FFC300">请选择展示机台号的范围</h5>
+            <div class="form-inline" >
+                <label for="machine_st" style="color: #FFC300" >起始机器:&nbsp&nbsp&nbsp&nbsp</label>
+                <input type="text" class="form-control" id="machine_st" size="1" value =1>
+                &nbsp&nbsp
+                <label for="machine_ed"  style="color: #FFC300">~    末置机器:&nbsp&nbsp&nbsp&nbsp</label>
+                <input type="text" class="form-control" id="machine_ed" size="1" value =40>
+            </div>
+            <div style="font-weight: bold;font-size: 20px;">
+                <br>
+                <h5 id="machID" style="text-align: center; color:#22cab7">机器编码</h5>
+            </div>
+
+            <div class="div_p">
+                <div class="div1"  id = 'w_e'>
+                    生产效率:
+
+                </div>
+                <div class="div2"  id = 't_on'>
+                    开机时间:
+                </div>
+            </div>
+            <br>
+
+            <div class="div_p">
+                <div class="div1"  id = 't_e'>
+                    开机效率:
+                </div>
+
+                <div class="div2"  id = 't_off'>
+                    停机时间:
+                </div>
+
+            </div>
+            <br>
+            <div class="div_p">
+                <div class="div1"  id = 'l_c'>
+                    最近周期:
+                </div>
+                <div class="div2"  id = 'l_s'>
+                    最近故障:
+                </div>
+            </div>
+            <br>
+
+            <div class="div_p">
+
+                <div class="div1"  id = 'pieces'>
+                    生产数量:
+                </div>
+                <div class="div2"  id = 's_c'>
+                    产品型号:
+                </div>
+            </div>
+
+            <div class="link-top"></div>
+            <div class="container">
+                <br>
+
+                <h2 style="text-align: center;">故障报告日志</h2>
+                <form method="post" action="" enctype="multipart/form-data" id="myform">
+                    <div >
+                        <input type="file" id="file" name="file" />
+                        <input type="button" class="button" value="Upload" id="but_upload">
+                    </div>
+                </form>
+            </div>
+            <br>
+            <form id = 'form' action="php/send_post.php" method="post" target="nm_iframe" style="display: block" >
+                <div class="form-group row">
+                    <label for="Sender" class="col-sm-2 col-form-label">发送人</label>
+                    <div class="col-sm-10">
+                        <input type="text" name='post_Sender' class="col-xs-2" id="Sender" @input="onInput" placeholder="你的姓名..." >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="Receiver" class="col-sm-2 col-form-label">接收人</label>
+                    <div class="col-sm-10">
+                        <input type="text" name='post_Receiver' class="col-xs-2" id="Receiver" @input="onInput" placeholder="接收人员姓名..." >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="MachineId" class="col-sm-2 col-form-label">机器号</label>
+                    <div class="col-sm-10">
+                        <input type="text" name='post_MachineId' class="col-xs-2" id="MachineId" @input="onInput" placeholder="故障机器编号...">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="StopCode" class="col-sm-2 col-form-label">故障码</label>
+                    <div class="col-sm-10">
+                        <input type="text" name='post_StopCode' class="col-xs-2" id = 'StopCode' @input="onInput" placeholder="故障码或故障描述...">
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label for="fileName" class="col-sm-2 col-form-label">文件名</label>
+                    <div class="col-sm-10">
+                        <input type="text" name='post_FileName' class="col-xs-2" id = 'fileName' @input="onInput" placeholder="输入上传文件名称...">
+                    </div>
+
+                </div>
+                <div >
+                    <textarea id="subject" name="post_details" @input="onInput" placeholder="标注..." style="height:50px; width: 96%; float: left"></textarea>
+                </div>
+                <br>
+                <button onclick="myFunction()" class="btn btn-primary" type="submit">提交表格</button>
+            </form>
+
+            <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
+            <br>
+            <div id = "log_table_div">
+                <table style="width:98%;border: 1px solid #828d46;" id="log_table" style="font-size:12px;">
+                    <thead>
+                    <tr>
+                        <th style="border: 1px solid yellowgreen;">时间</th>
+                        <th style="border: 1px solid yellowgreen;">发送人</th>
+                        <th style="border: 1px solid yellowgreen;">接收人</th>
+                        <th style="border: 1px solid yellowgreen;">机器</th>
+                        <th style="border: 1px solid yellowgreen;">故障码</th>
+                    </tr>
+                    <tbody id="log_table_body">
+                    </tbody>
+                </table>
+                <br>
+                <textarea id="details" placeholder="故障细节描述..." style="height:70px; width: 96%; float: left"></textarea>
+
+            </div>
+        </div>
+
+    </div>
+    <div id ='pic_div'>
+        <img id="pic" />
+    </div>
+
+</div>
+
+</body>
+<script>
+    var picture_name;
+
+    var log = function(){
+        let today = new Date();
+        let time = today. getHours();
+        let month = today.getMonth() + 1;
+        let date = today.getFullYear()+'-'+month+'-'+today.getDate()
+
+        let start_date;
+        let start_time;
+        if(parseInt(time)>=7 && parseInt(time)<19){
+            start_date = today.getFullYear()+'-'+month+'-'+today.getDate();
+            start_time = '07:00:00'
+        }else{
+            let day = today.getDate()-1;
+            start_date = today.getFullYear()+'-'+month+'-'+day;
+            start_time = '19:00:00'
+        }
+
+        $.ajax({
+            url: 'php/issue_log.php',
+            type: 'POST',
+            data:{start_date: start_date,start_time:start_time,picture_name:picture_name},
+            success: function(data){
+                create_log_table(data);
+                picture_name = "";
+
+            },
+            error: function(){
+
+                alert('Error loading XML document');
+            }
+        })
+    }
+
+    var getting = function() {
+
+        let today = new Date();
+        let time = today. getHours();
+        let month = today.getMonth() + 1;
+        let date = today.getFullYear()+'-'+month+'-'+today.getDate()
+
+        // select machines
+        let machine_start = $('#machine_st').val();
+        let machine_end = $('#machine_ed').val();
+
+        let start_date;
+        let start_time;
+        if(parseInt(time)>=7 && parseInt(time)<19){
+            start_date = today.getFullYear()+'-'+month+'-'+today.getDate();
+            start_time = '07:00:00'
+        }else{
+            let day = today.getDate()-1;
+            start_date = today.getFullYear()+'-'+month+'-'+day;
+            start_time = '19:00:00'
+        }
+            $.ajax({
+        url: 'php/realTimeError.php',
+        type: 'POST',
+        data:{start_date: start_date,start_time:start_time,machine_start:machine_start,machine_end:machine_end},
+        success: function(data){
+           let new_data = JSON.parse(data);
+           let real_new_data = new_data['error'];
+           let fixed = [];
+           let unfixed = [];
+           for(let i in real_new_data){
+               if(real_new_data[i]['DateEndStop']){
+                   fixed.push(real_new_data[i])
+               }else{
+                   unfixed.push(real_new_data[i])
+               }
+           }
+            var dt = new Date();
+            var time = (dt.getMonth()+1)+'-'+dt.getDate()+' '+dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+           document.getElementById('update_time').innerText = '更新时间: '+ time;
+           realTime_error_table(unfixed);
+           realTime_error_bar(fixed,unfixed);
+           realTime_error_machine(fixed,unfixed);
+           real_machine_status(new_data);
+        },
+        error: function(){
+
+            alert('Error loading XML document');
+        }
+     })
+    }
+    function myFunction() {
+        setTimeout(function(){
+            document.getElementById('Sender').value = '';
+            document.getElementById('Receiver').value = '';
+            document.getElementById('MachineId').value = '';
+            document.getElementById('StopCode').value = '';
+            document.getElementById('subject').value = '';
+            document.getElementById('fileName').value = '';
+            document.getElementById('details').value = '';
+            ///////////////////////////////////////////////
+        },1000);
+    }
+
+
+    ///////////////run php
+    log();
+    getting();
+    setInterval(getting,20000);
+    setInterval(log,20000);
+
+    //load image function
+    $(document).ready(function(){
+
+        $("#but_upload").click(function(){
+
+            var fd = new FormData();
+            var files = $('#file')[0].files[0];
+            fd.append('file',files);
+            picture_name = files['name']
+            $.ajax({
+                url: 'php/upload.php',
+                type: 'post',
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: function(response){
+                    if(response != 0){
+                        $("#img").attr("src",response);
+                    }else{
+                        alert('file not uploaded');
+                    }
+                },
+            });
+        });
+    });
+
+    //fang dou dong
+    function onInput(e){
+        this.name = e.target.value;
+    }
+
+    //hide form
+   /* function form_change(){
+        let form_name = $("#inputGroupSelect").val();
+        if(form_name==1){
+            $('#form').show();
+            $('#form_skip').hide();
+        }else{
+            $('#form').hide();
+            $('#form_skip').show();
+        }
+    }*/
+    //$('#form').hide();
+</script>
+
+
+</html>
