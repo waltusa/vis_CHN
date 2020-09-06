@@ -264,7 +264,6 @@
         let today = new Date();
         let time = today. getHours();
         let month = today.getMonth() + 1;
-        let date = today.getFullYear()+'-'+month+'-'+today.getDate()
 
         // select machines
         let machine_start = $('#machine_st').val();
@@ -276,7 +275,7 @@
             start_date = today.getFullYear()+'-'+month+'-'+today.getDate();
             start_time = '07:00:00'
         }else{
-            let day = today.getDate()-1;
+            let day = today.getDate();
             start_date = today.getFullYear()+'-'+month+'-'+day;
             start_time = '19:00:00'
         }
@@ -285,6 +284,7 @@
         type: 'POST',
         data:{start_date: start_date,start_time:start_time,machine_start:machine_start,machine_end:machine_end},
         success: function(data){
+            console.log(start_date)
            let new_data = JSON.parse(data);
            let real_new_data = new_data['error'];
            let fixed = [];

@@ -35,16 +35,9 @@ function real_machine_status(machine_data) {
 
         images.append('image')
             .attr('xlink:href', function (d) {
-                if (d['TimeOn'] ==0 || d['State']==1){
-                    if(d['State']==1){
+                if (d['TimeOn'] ==0 ){
                         stop_total+=1;
                         return 'image/off2.png'
-                    }else{
-                        stop_total+=1;
-                        return 'image/ma.png'
-                    }
-
-
                 }else if(d['State']==0){
                     w_efficiency.push(d['WorkEfficiency']);
                     t_efficiency.push(d['TimeEfficiency']);
@@ -63,13 +56,13 @@ function real_machine_status(machine_data) {
                     return 'image/stop.PNG'
                 }
             })
-            .attr("x", function (d,i) { return (i%10)*50+30 })
+            .attr("x", function (d,i) { return (i%11)*50 })
             .attr("y", function(d,i){
-                if(i<10){
+                if(i<11){
                     return 20
-                }else if(i>=10 && i<20){
+                }else if(i>=11 && i<22){
                     return 100
-                }else if(i>=20 && i<30){
+                }else if(i>=22 && i<33){
                     return 180
                 }else{
                     return 260
@@ -104,13 +97,13 @@ function real_machine_status(machine_data) {
         .text(function(d){
             return d['MachCode']
         })
-        .attr("x", function (d,i) { return (i%10)*50+44 })
+        .attr("x", function (d,i) { return (i%11)*50+12 })
         .attr("y", function(d,i){
-            if(i<10){
+            if(i<11){
                 return 20+50
-            }else if(i>=10 && i<20){
+            }else if(i>=11 && i<22){
                 return 100+50
-            }else if(i>=20 && i<30){
+            }else if(i>=22 && i<33){
                 return 180+50
             }else{
                 return 260+50
