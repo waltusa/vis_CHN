@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,9 +10,12 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="js/library/echarts.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+    <!--code.jquery.com国内无法访问，改为本地读取-->
+    <link rel="stylesheet" href="/js/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="/js/jquery-1.9.1.js"></script>
+    <script src="/js/ui/1.10.4/jquery-ui.js"></script>
+
     <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
     <link rel="stylesheet" href="css/style.css">
 
@@ -26,310 +30,327 @@
 
 
 
-<body>
-<div class="wrapper">
-    <div class="row">
-        <div class="col-sm">
-            <span class="con"></span>
+    <body>
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-sm">
+                    <span class="con"></span>
 
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link"  href="realTime.html"><h5>实时监控</h5></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html"><h5>数据库查询</h5></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="QC_form.html"><h5>质量预检</h5></a>
-                </li>
-            </ul>
-            <div class="card">
-                <div  style="background: #efda6d; color: #e2294e">
-                    <h5 id = "tp" style="text-align: left;"><strong>总计生产数量:</strong></h5>
-                    <h5 id = "sc" style="text-align: left"><strong>生产型号(数量):</strong></h5>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" href="realTime.html">
+                                <h5>实时监控</h5>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <h5>数据库查询</h5>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="QC_form.html">
+                                <h5>质量预检</h5>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="card">
+                        <div style="background: #efda6d; color: #e2294e">
+                            <h5 id="tp" style="text-align: left;"><strong>总计生产数量:</strong></h5>
+                            <h5 id="sc" style="text-align: left"><strong>生产型号(数量):</strong></h5>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-sm col-sm-1">开始日期:<input class="custom-select" type="text" id="sd" size="8"></div>
-        <div class="col-sm col-sm-1" >开始时间:
-            <select id="st" class="custom-select">
-                <option value='19:00:00'>19:00:00</option>
-                <option value='07:00:00'>07:00:00</option>
+                <div class="col-sm col-sm-1">开始日期:<input class="custom-select" type="text" id="sd" size="8"></div>
+                <div class="col-sm col-sm-1">开始时间:
+                    <select id="st" class="custom-select">
+                <option value='20:00:00'>20:00:00</option>
+                <option value='08:00:00'>08:00:00</option>
             </select>
-            <div class="form-inline">
-            <label for="machine_st" >起始机器:</label>
-            <input type="text" class="form-control" id="machine_st" size="1" value =1>
-            </div>
-        </div>
-        <div class="col-sm col-sm-1">结束日期:<input class="custom-select" type="text" id="ed" size="8">
+                    <div class="form-inline">
+                        <label for="machine_st">起始机器:</label>
+                        <input type="text" class="form-control" id="machine_st" size="2" value=2>
+                    </div>
+                </div>
+                <div class="col-sm col-sm-1">结束日期:<input class="custom-select" type="text" id="ed" size="8">
 
-        </div>
-        <div class="col-sm col-sm-1" >结束时间:
-            <select id="et" class="custom-select">
-                <option value='07:00:00'>07:00:00</option>
-                <option value='19:00:00'>19:00:00</option>
+                </div>
+                <div class="col-sm col-sm-1">结束时间:
+                    <select id="et" class="custom-select">
+                <option value='08:00:00'>08:00:00</option>
+                <option value='20:00:00'>20:00:00</option>
             </select>
-            <div class="form-inline">
-                <label for="machine_ed" >末位机器:</label>
-                <input type="text" class="form-control" id="machine_ed" size="1" value =40>
-            </div>
+                    <div class="form-inline">
+                        <label for="machine_ed">末位机器:</label>
+                        <input type="text" class="form-control" id="machine_ed" size="1" value=46>
+                    </div>
 
-        </div>
-        <br>
-        <button id= 'date_update' type="button" class="btn" onclick="date_update()" ><img src="image/inquery.png" style="width:155px;height:75px;top:25px"/></button>
+                </div>
+                <br>
+                <button id='date_update' type="button" class="btn" onclick="date_update()"><img src="image/inquery.png" style="width:155px;height:75px;top:25px"/></button>
 
-        <div class="col-sm">
-            <br>
-            <br>
-            <div class="app">
+                <div class="col-sm">
+                    <br>
+                    <br>
+                    <div class="app">
 
-                <div style="float:left;">
-                    <select id="top_error_shifts">
+                        <div style="float:left;">
+                            <select id="top_error_shifts">
                         <option value = 1>前 10 故障次数</option>
                         <option value = 2>前 10 停机时间</option>
                     </select>
+                        </div>
+
+                        <div style="float:right;margin-right:10px;">
+                            <ul class="pagination" id='table_separate_shifts'>
+                                <li class="page-item"><a class="page-link" href="#">上一页</a></li>
+                                <li class="page-item"><a class="page-link" href="#">下一页</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
                 </div>
 
-                <div style="float:right;margin-right:10px;">
-                    <ul class="pagination" id = 'table_separate_shifts'>
-                        <li class="page-item"><a class="page-link" href="#">上一页</a></li>
-                        <li class="page-item"><a class="page-link" href="#">下一页</a></li>
-                    </ul>
-                </div>
+
 
             </div>
-        </div>
+            <div class="row">
 
+                <div class="col">
+                    <br>
+                    <div class="div_p">
+                        <div class="div1">
+                            <h5 id="text_id" style="color: #f106d2">机器编码：</h5>
+                        </div>
+                        <div class="div2">
+                            <h5 id="style_code">产品型号：</h5>
+                        </div>
+                    </div>
+                    <div class="div_p">
+                        <div class="div1">
+                            <h5 id="text_open">开机时间：</h5>
+                        </div>
+                        <div class="div2">
+                            <h5 id="text_stop">关机时间：</h5>
+                        </div>
+                    </div>
+                    <div class="div_p">
+                        <div class="div1">
+                            <h5 id="text_cycle">最大周期：</h5>
+                        </div>
+                        <div class="div2">
+                            <h5 id="text_pieces">生产数量：</h5>
+                        </div>
 
+                    </div>
+                    <div class="div_p">
+                        <div class="div1">
+                            <h5 id="text_timeE">开机效率：</h5>
+                        </div>
+                        <div class="div2">
+                            <h5 id="text_workE">生产效率：</h5>
+                        </div>
+                    </div>
 
-    </div>
-    <div class="row">
+                    <div id="machine_product" style="width:98%; height:200px;">
+                    </div>
 
-        <div class="col">
-            <br>
-            <div class="div_p">
-                <div class="div1">
-                    <h5 id="text_id" style="color: #f106d2">机器编码：</h5>
                 </div>
-                <div class="div2">
-                    <h5 id="style_code">产品型号：</h5>
-                </div>
-            </div>
-            <div class="div_p">
-                <div class="div1">
-                    <h5 id="text_open">开机时间：</h5>
-                </div>
-                <div class="div2">
-                    <h5 id="text_stop">关机时间：</h5>
-                </div>
-            </div>
-            <div class="div_p">
-                <div class="div1">
-                    <h5 id="text_cycle">最大周期：</h5>
-                </div>
-                <div class="div2">
-                    <h5 id="text_pieces">生产数量：</h5>
-                </div>
-
-            </div>
-            <div class="div_p">
-                <div class="div1">
-                    <h5 id="text_timeE">开机效率：</h5>
-                </div>
-                <div class="div2">
-                    <h5 id="text_workE">生产效率：</h5>
-                </div>
-            </div>
-
-
-
-
-
-            <div id="machine_product" style="width:98%; height:200px;">
-            </div>
-
-        </div>
-        <div class="col-6 ">
-            <br>
-            <div class="form-check-inline" style="text-align: center">
-                <label class="form-check-label">
+                <div class="col-6 ">
+                    <br>
+                    <div class="form-check-inline" style="text-align: center">
+                        <label class="form-check-label">
                     <input type="radio" class="form-check-input" id="work_time" name="efficiency_error" value="WT" checked>生产效率/开机效率
-                </label>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                <label class="form-check-label">
+                </label> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        <label class="form-check-label">
                     <input type="radio" class="form-check-input" id="duration_counts" name="efficiency_error" value="CD">故障次数/故障时长（分钟)
                 </label>
+                    </div>
+                    <div id="efficiency_error_chart" style="width:98%; height:300px;">
+                    </div>
+                </div>
+
+
+                <div class="col">
+
+                    <div id="error_rank">
+                        <table class="table table-hover " id="error_result_shifts" style="font-size:14px;">
+                            <thead>
+                                <tr style="color:red">
+                                    <th>停机代码</th>
+                                    <th>停机描述</th>
+                                    <th>次</th>
+                                    <th id='table_diff_shifts'>%</th>
+                                </tr>
+                                <tbody id="error_body_result_shifts" style="color:#d46208">
+                                </tbody>
+                        </table>
+
+                    </div>
+                </div>
             </div>
-            <div id="efficiency_error_chart" style="width:98%; height:300px;">
-            </div>
-        </div>
+            <div class="row">
+                <div class="col">
+                    <div id="error_summary_line" style="width:99%;"></div>
+                    <div id="error_summary_bar" style="width:99%;"></div>
+                </div>
+                <div class="col-6">
+                    <div id="date_data" style="width:98%; height:300px;">
+                    </div>
+                    <div id="sankey_diagram" style="width:110%;">
+                    </div>
+                </div>
+                <div class="col">
+                    <div id="table_chart_shifts_time" style="width:95%; height: 240px"></div>
+                    <div id="table_chart_shifts" style="width:95%; height: 380px"></div>
 
-
-        <div class="col">
-
-            <div id = "error_rank">
-                <table class="table table-hover " id="error_result_shifts" style="font-size:14px;">
-                    <thead>
-                    <tr style="color:red">
-                        <th >停机代码</th>
-                        <th>停机描述</th>
-                        <th>次</th>
-                        <th id='table_diff_shifts'>%</th>
-                    </tr>
-                    <tbody id="error_body_result_shifts" style="color:#d46208">
-                    </tbody>
-                </table>
+                </div>
 
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div id="error_summary_line" style="width:99%;"></div>
-            <div id="error_summary_bar" style="width:99%;"></div>
-        </div>
-        <div class="col-6">
-            <div id="date_data" style="width:98%; height:300px;">
-            </div>
-            <div id="sankey_diagram" style="width:110%;">
-            </div>
-        </div>
-        <div class="col">
-            <div id="table_chart_shifts_time" style="width:95%; height: 240px"></div>
-            <div id="table_chart_shifts" style="width:95%; height: 380px"></div>
+
 
         </div>
+    </body>
 
-    </div>
+    <script>
+        $(function() {
+            $("#sd").datepicker();
+            $("#ed").datepicker();
 
+            //设置默认日期为从昨天到今天
+            var today = new Date();
+            var yesterday = new Date(today - 24 * 60 * 60 * 1000);
+            $("#sd").val(dateToStr(yesterday));
+            $("#ed").val(dateToStr(today));
+        });
 
-</div>
-</body>
+        //把 Date 对象转换为 月/日/年 的形式
+        function dateToStr(date) {
+            return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
+        }
 
-<script>
-    $(function() {
-        $( "#sd" ).datepicker();
-    });
-    $(function() {
-        $( "#ed" ).datepicker();
-    });
-
-    var new_data;
-    var machine_error_data;
-    var machine_product_info ={};
-    var tag;
-    var sd,st,ed,et;
-    var machine_st;
-    var machine_ed;
-
-
-    //when click the enquire button, will call this function
-    function date_update(){
-        new_data;
-        machine_error_data;
-        machine_product_info ={};
-        clean_charts();
-        text_clean();
-        sd = $("#sd").val();
-        st = $("#st").val();
-        ed = $("#ed").val();
-        et = $("#et").val();
-        machine_st = $("#machine_st").val();
-        machine_ed = $("#machine_ed").val();
+        var new_data;
+        var machine_error_data;
+        var machine_product_info = {};
+        var tag;
+        var sd, st, ed, et;
+        var machine_st;
+        var machine_ed;
 
 
-        if(sd && st && ed && et){
-            $.ajax({
-                url: 'php/data_load.php',
-                type: 'POST',
-                data:{start_date:sd,start_time:st,end_date:ed,end_time:et,machine_start:machine_st,machine_end:machine_ed},
-                success: function(data){
-                    new_data = JSON.parse(data);
-                    let option = $('input[name="efficiency_error"]:checked').val();
-                    if(option=='WT'){
-                        efficiency_bars(sd,st,ed,et,new_data['product']);
-                    }else{
+        //when click the enquire button, will call this function
+        function date_update() {
+            new_data;
+            machine_error_data;
+            machine_product_info = {};
+            clean_charts();
+            text_clean();
+            sd = $("#sd").val();
+            st = $("#st").val();
+            ed = $("#ed").val();
+            et = $("#et").val();
+            machine_st = $("#machine_st").val();
+            machine_ed = $("#machine_ed").val();
 
-                        stop_bars(sd,st,ed,et,new_data['error'])
+
+            if (sd && st && ed && et) {
+                $.ajax({
+                    url: 'php/data_load.php',
+                    type: 'POST',
+                    data: {
+                        start_date: sd,
+                        start_time: st,
+                        end_date: ed,
+                        end_time: et,
+                        machine_start: machine_st,
+                        machine_end: machine_ed
+                    },
+                    success: function(data) {
+                        new_data = JSON.parse(data);
+                        let option = $('input[name="efficiency_error"]:checked').val();
+                        if (option == 'WT') {
+                            efficiency_bars(sd, st, ed, et, new_data['product']);
+                        } else {
+
+                            stop_bars(sd, st, ed, et, new_data['error'])
+                        }
+
+                        summary_production(new_data['product']);
+
+                        main_area_chart();
+
+                        machine_error_table('上一页', 1)
+
+                    },
+                    error: function() {
+                        document.getElementById('info').innerText = "Connect Failed..."
+
+                        alert('Error loading XML document');
                     }
+                });
+            } else {
+                alert('Start Time or End Time is incorrect! Please re-select')
+            }
+        }
 
-                    summary_production(new_data['product']);
+        $('input[name="efficiency_error"]').change(function() {
 
-                    main_area_chart();
+            let option = $('input[name="efficiency_error"]:checked').val();
+            if (option == 'WT') {
+                efficiency_bars(sd, st, ed, et, new_data['product']);
+                //efficiency_id(machine_product_info)
 
-                    machine_error_table('上一页',1)
+            } else {
+                stop_bars(sd, st, ed, et, new_data['error'])
+                    //stop_machine_chart(machine_error_data);
+            }
 
-                },
-                error: function(){
-                    document.getElementById('info').innerText="Connect Failed..."
+        });
 
-                    alert('Error loading XML document');
+        let ul = document.getElementById('table_separate_shifts');
+        ul.onclick = function(event) {
+            let caty = document.getElementById('top_error_shifts');
+            let index = caty.selectedIndex; //获取选中的index
+            let value = caty.options[index].value;
+
+            machine_error_table(event.target.innerHTML.toLowerCase(), value)
+
+        };
+
+        $('#top_error_shifts').on('change', function(e) {
+            let caty = document.getElementById('top_error_shifts');
+            let index = caty.selectedIndex; //获取选中的index
+            let value = caty.options[index].value;
+
+            machine_error_table(e.target.innerHTML.toLowerCase(), value)
+        });
+
+
+        function summary_production(data) {
+            let style_code = {};
+            let count = 0;
+            for (let i in data) {
+                let obj = data[i];
+                if (obj['StyleCode'] in style_code) {
+                    style_code[obj['StyleCode']] += obj['Pieces']
+                    count += obj['Pieces']
+                } else {
+                    style_code[obj['StyleCode']] = obj['Pieces']
+                    count += obj['Pieces']
                 }
-            });
-        }else{
-            alert('Start Time or End Time is incorrect! Please re-select')
-        }
-    }
-
-    $('input[name="efficiency_error"]').change(function(){
-
-        let option = $('input[name="efficiency_error"]:checked').val();
-        if(option=='WT'){
-            efficiency_bars(sd,st,ed,et,new_data['product']);
-            //efficiency_id(machine_product_info)
-
-        }else{
-            stop_bars(sd,st,ed,et,new_data['error'])
-            //stop_machine_chart(machine_error_data);
-        }
-
-    });
-
-    let ul = document.getElementById('table_separate_shifts');
-    ul.onclick = function(event) {
-        let caty= document.getElementById('top_error_shifts');
-        let index = caty.selectedIndex;                  //获取选中的index
-        let value = caty.options[index].value;
-
-        machine_error_table(event.target.innerHTML.toLowerCase(),value)
-
-    };
-
-    $('#top_error_shifts').on('change', function(e) {
-        let caty= document.getElementById('top_error_shifts');
-        let index = caty.selectedIndex;                  //获取选中的index
-        let value = caty.options[index].value;
-
-        machine_error_table(e.target.innerHTML.toLowerCase(),value)
-    });
-
-
-    function summary_production(data){
-        let style_code = {};
-        let count = 0;
-        for(let i in data){
-            let obj = data[i];
-            if(obj['StyleCode'] in style_code){
-                style_code[obj['StyleCode']]+=obj['Pieces']
-                count+=obj['Pieces']
-            }else{
-                style_code[obj['StyleCode']]=obj['Pieces']
-                count+=obj['Pieces']
             }
-        }
-        let context = ""
-        for (let m in style_code){
-            if(style_code[m]!=0){
-                let imm_str = m.replace(" ", "")+"("+style_code[m]+');  '
-                context+=imm_str
+            let context = ""
+            for (let m in style_code) {
+                if (style_code[m] != 0) {
+                    let imm_str = m.replace(" ", "") + "(" + style_code[m] + ');  '
+                    context += imm_str
+                }
             }
-        }
-        console.log(context)
-        document.getElementById('tp').innerText = '总计生产数量: '+count;
-        document.getElementById('sc').innerText = '生产型号(数量): '+context;
+            console.log(context)
+            document.getElementById('tp').innerText = '总计生产数量: ' + count;
+            document.getElementById('sc').innerText = '生产型号(数量): ' + context;
 
-    }
-</script>
+        }
+    </script>
 
 </html>

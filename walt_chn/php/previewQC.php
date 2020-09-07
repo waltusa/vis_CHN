@@ -1,4 +1,7 @@
 <?php
+
+require('db_info.php'); //数据库连接信息请在这个文件里改
+
 $DateRec = $_POST['DateRec'];
 $Name = $_POST['Name'];
 $itemNum = $_POST['styleCode'];
@@ -8,8 +11,6 @@ $SecondCheck = $_POST['SecondCheck'];
 $ThirdCheck = $_POST['ThirdCheck'];
 $Weight = $_POST['Weight'];
 $KnittedTime = $_POST['KnittedTime'];
-$serverName = "D25W0333\\SQLEXPRESS";
-$connectionInfo = array( "Database"=>"non_skip","UID"=>"Nautilus", "PWD"=>"MasterUser78");
 
 $conn = sqlsrv_connect( $serverName, $connectionInfo);
 if( $conn === false ) {
