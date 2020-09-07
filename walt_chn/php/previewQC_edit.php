@@ -1,7 +1,8 @@
 <?php
 
-$serverName = "D25W0333\\SQLEXPRESS";
-$connectionInfo = array( "Database"=>"non_skip","UID"=>"Nautilus", "PWD"=>"MasterUser78");
+
+require('db_info.php'); //数据库连接信息请在这个文件里改
+
 
 $conn = sqlsrv_connect( $serverName, $connectionInfo);
 if( $conn === false ) {

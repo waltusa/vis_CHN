@@ -1,13 +1,20 @@
 <?php
+
+require('db_info.php'); //数据库连接信息请在这个文件里改
+
+// $start_date = "2020-09-01";
+// $start_time = "8:00";
+// $end_date = "2020-09-02";
+// $end_time = "8:00";
+// $machine_start= 1;
+// $machine_end= 40;
+
 $start_date = $_POST['start_date'];
 $start_time = $_POST['start_time'];
 $end_date = $_POST['end_date'];
 $end_time = $_POST['end_time'];
 $machine_start= $_POST['machine_start'];
 $machine_end= $_POST['machine_end'];
-
-$serverName = "D25W0333\\SQLEXPRESS";
-$connectionInfo = array( "Database"=>"dbNautilus","UID"=>"Nautilus", "PWD"=>"MasterUser78");
 
 $start = $start_date.' '.$start_time;
 $end = $end_date.' '.$end_time;
@@ -38,7 +45,7 @@ if( $conn === false )
         	$result = sqlsrv_query($conn, $sql);
             while($row = sqlsrv_fetch_array($result)) {
                  $new['StopCode'] = $row['StopCode'];
-                 $new['description'] = $row['description'];
+                 $new['description'] = iconv("GBK","UTF-8",$row['description']); //中文转码
                  $new['DateRec'] = $row['DateRec']->format('yy-m-d H:i:s');
                  $new['MachCode'] = $row['MachCode'];
                  $new['LastStopCode'] = $row['LastStopCode'];
@@ -62,7 +69,6 @@ if( $conn === false )
                     WHERE [DateRec] >'$start' and [DateRec]<='$end' and [MachCode]>='$machine_start' and [MachCode]<='$machine_end'
                     order by DateRec";
 
-
             $result2 = sqlsrv_query($conn, $sql2);
             while($row2 = sqlsrv_fetch_array($result2)) {
                      $new2['DateRec'] = $row2['DateRec']->format('yy-m-d H:i:s');
@@ -75,7 +81,6 @@ if( $conn === false )
                      $new2['DateStartShift'] = $row2['DateStartShift']->format('yy-m-d H:i:s');
                      array_push($a['product'], $new2);
              }
-
             echo json_encode($a);
         }
 ?>

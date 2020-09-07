@@ -1,11 +1,12 @@
 <?php
+
+require('db_info.php'); //数据库连接信息请在这个文件里改
+
 $start_date = $_POST['start_date'];
 $start_time = $_POST['start_time'];
 $machine_start = $_POST['machine_start'];
 $machine_end = $_POST['machine_end'];
 
-$serverName = "D25W0333\\SQLEXPRESS";
-$connectionInfo = array( "Database"=>"dbNautilus","UID"=>"Nautilus", "PWD"=>"MasterUser78");
 $start = $start_date.' '.$start_time;
 $conn = sqlsrv_connect( $serverName, $connectionInfo);
 if( $conn === false )
@@ -32,7 +33,7 @@ if( $conn === false )
         	$result = sqlsrv_query($conn, $sql);
             while($row = sqlsrv_fetch_array($result)) {
                  $new['StopCode'] = $row['StopCode'];
-                 $new['description'] = $row['description'];
+                 $new['description'] = iconv("GBK","UTF-8",$row['description']); //中文转码
                  $new['DateRec'] = $row['DateRec']->format('yy-m-d H:i:s');
                  $new['MachCode'] = $row['MachCode'];
                  $new['LastStopCode'] = $row['LastStopCode'];

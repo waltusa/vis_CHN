@@ -1,6 +1,7 @@
 <?php
 //Connecting to sql db.
 
+require('db_info.php'); //数据库连接信息请在这个文件里改
 
 $serverName = "D25W0333\\SQLEXPRESS";
 $connectionInfo = array( "Database"=>"operator_log","UID"=>"Nautilus", "PWD"=>"MasterUser78");
