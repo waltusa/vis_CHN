@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Walt VIS</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
@@ -17,127 +19,132 @@
 
 
 </head>
+
 <body>
 
-<div class="wrapper">
-    <div class="row">
-        <div class="col-sm">
-            <span class="con"></span>
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-sm">
+                <span class="con"></span>
 
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link"  href="realTime.html"><h5>实时监控</h5></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html"><h5>数据库查询</h5></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="QC_form.html"><h5>质量预检</h5></a>
-                </li>
-            </ul>
-            <br>
-            <br>
-            <div class="form-inline" id="operator_name">
-                <label for="name" >Operator Name:  &nbsp&nbsp&nbsp&nbsp</label>
-                <select class="form-control" id="name" >
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link" href="realTime.html">
+                            <h5>实时监控</h5>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <h5>数据库查询</h5>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="QC_form.html">
+                            <h5>质量预检</h5>
+                        </a>
+                    </li>
+                </ul>
+                <br>
+                <br>
+                <div class="form-inline" id="operator_name">
+                    <label for="name">Operator Name:  &nbsp&nbsp&nbsp&nbsp</label>
+                    <select class="form-control" id="name">
                     <option>staff 1</option>
                     <option>staff 2</option>
                     <option>staff 3</option>
                     <option>staff 4</option>
-                </select>
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                <label for="k_time" >Knitted Date:  &nbsp&nbsp&nbsp&nbsp</label>
-                <input class="custom-select" type="text" id="k_time" size="8">
-            </div>
-            <br>
-            <div class="form-inline" id="style_code">
-                <label for="item_num" >Item number:  &nbsp&nbsp&nbsp&nbsp</label>
-                <input type="text" class="form-control" id="item_num" size="15">
-                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                <label for="weight" >Weight(kg):  &nbsp&nbsp&nbsp&nbsp</label>
-                <input type="text" class="form-control" id="weight" size="5">
-            </div>
-            <br>
-            <div class="form-group" id="first_check">
-                <div class="form-check-inline" style="float: left" >
-                    <h5>Fist Time Check Result (5%): </h5>
+                </select> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <label for="k_time">Knitted Date:  &nbsp&nbsp&nbsp&nbsp</label>
+                    <input class="custom-select" type="text" id="k_time" size="8">
                 </div>
-                <div class="form-check-inline"  style="color: #0ac639">
-                    <label class="form-check-label">
+                <br>
+                <div class="form-inline" id="style_code">
+                    <label for="item_num">Item number:  &nbsp&nbsp&nbsp&nbsp</label>
+                    <input type="text" class="form-control" id="item_num" size="15"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <label for="weight">Weight(kg):  &nbsp&nbsp&nbsp&nbsp</label>
+                    <input type="text" class="form-control" id="weight" size="5">
+                </div>
+                <br>
+                <div class="form-group" id="first_check">
+                    <div class="form-check-inline" style="float: left">
+                        <h5>Fist Time Check Result (5%): </h5>
+                    </div>
+                    <div class="form-check-inline" style="color: #0ac639">
+                        <label class="form-check-label">
                         <input type="radio" class="form-check-input" name="1st_check" value="1">Pass!
                     </label>
-                </div>
-                <div class="form-check-inline" style="color: #ff0015">
-                    <label class="form-check-label">
+                    </div>
+                    <div class="form-check-inline" style="color: #ff0015">
+                        <label class="form-check-label">
                         <input type="radio" class="form-check-input" name="1st_check" value="2" >Rework!
                     </label>
+                    </div>
                 </div>
-            </div>
-            <br>
-            <button type="button" class="btn btn-success" style="display: none" id="1st_check_button" onclick="st_click()">Submit!</button>
+                <br>
+                <button type="button" class="btn btn-success" style="display: none" id="1st_check_button" onclick="st_click()">Submit!</button>
 
-            <div class="form-group" id="second_check" style="display: none;">
-                <div class="form-check-inline" style="float: left" >
-                    <h5>Second Time Check Result (10%): </h5>
-                </div>
-                <div class="form-check-inline"  style="color: #0ac639">
-                    <label class="form-check-label">
+                <div class="form-group" id="second_check" style="display: none;">
+                    <div class="form-check-inline" style="float: left">
+                        <h5>Second Time Check Result (10%): </h5>
+                    </div>
+                    <div class="form-check-inline" style="color: #0ac639">
+                        <label class="form-check-label">
                         <input type="radio" class="form-check-input" name="2nd_check" value="1">Pass!
                     </label>
-                </div>
-                <div class="form-check-inline" style="color: #ff0015">
-                    <label class="form-check-label">
+                    </div>
+                    <div class="form-check-inline" style="color: #ff0015">
+                        <label class="form-check-label">
                         <input type="radio" class="form-check-input" name="2nd_check" value="2">Rework!
                     </label>
+                    </div>
                 </div>
-            </div>
-            <br>
-            <button type="button" class="btn btn-success" style="display: none" id="2nd_check_button" onclick="nd_click()">Submit!</button>
-            <div class="form-group" id="third_check" style="display: none;">
-                <div class="form-check-inline" style="float: left" >
-                    <h5>Third Time Check Result (100%): </h5>
-                </div>
-                <div class="form-check-inline"  style="color: #0ac639">
-                    <label class="form-check-label">
+                <br>
+                <button type="button" class="btn btn-success" style="display: none" id="2nd_check_button" onclick="nd_click()">Submit!</button>
+                <div class="form-group" id="third_check" style="display: none;">
+                    <div class="form-check-inline" style="float: left">
+                        <h5>Third Time Check Result (100%): </h5>
+                    </div>
+                    <div class="form-check-inline" style="color: #0ac639">
+                        <label class="form-check-label">
                         <input type="radio" class="form-check-input" name="3rd_check" value="1">Pass!
                     </label>
-                </div>
-                <div class="form-check-inline" style="color: #ff0015">
-                    <label class="form-check-label">
+                    </div>
+                    <div class="form-check-inline" style="color: #ff0015">
+                        <label class="form-check-label">
                         <input type="radio" class="form-check-input" name="3rd_check" value="2">Rework!
                     </label>
+                    </div>
                 </div>
+                <button type="button" class="btn btn-success" style="display: none" id="3rd_check_button" onclick="fn_click()">Submit!</button>
+                <br>
+                <br>
+                <table class="table">
+                    <thead>
+                        <tr style="color: #22cab7">
+                            <th scope="col">Date</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">itemNum</th>
+                            <th scope="col">MachineID</th>
+                            <th scope="col">Weight(kg)</th>
+                            <th scope="col">Knitted Date</th>
+                            <th scope="col">1st Check</th>
+                            <th scope="col">2nd Check</th>
+                            <th scope="col">3rd Check</th>
+                            <th scope="col">Edit Operate</th>
+                        </tr>
+                    </thead>
+                    <tbody id="qc_table_body" style="color: #d46208;">
+                    </tbody>
+                </table>
             </div>
-            <button type="button" class="btn btn-success" style="display: none" id="3rd_check_button" onclick="fn_click()">Submit!</button>
-            <br>
-            <br>
-            <table class="table" >
-                <thead>
-                <tr style="color: #22cab7">
-                    <th scope="col">Date</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">itemNum</th>
-                    <th scope="col">MachineID</th>
-                    <th scope="col">Weight(kg)</th>
-                    <th scope="col">Knitted Date</th>
-                    <th scope="col">1st Check</th>
-                    <th scope="col">2nd Check</th>
-                    <th scope="col">3rd Check</th>
-                    <th scope="col">Edit Operate</th>
-                </tr>
-                </thead>
-                <tbody id="qc_table_body" style="color: #d46208;">
-                </tbody>
-            </table>
-        </div>
-        <div class="col-sm">
+            <div class="col-sm">
+
+            </div>
+            <div class="col-sm"></div>
 
         </div>
-        <div class="col-sm"></div>
-
     </div>
-</div>
 
 </body>
 <script>
@@ -170,7 +177,7 @@
 
             } else {
                 $("#1st_check_button").css("display", "none");
-               // $("#second_check").css("display", "none");
+                // $("#second_check").css("display", "none");
                 $("#2nd_check_button").css("display", "none");
                 $("#third_check").css("display", "block");
                 $("#3rd_check_button").css("display", "none");
@@ -188,34 +195,41 @@
         });
     });
 
-    function st_click(){
-        insert_data('pass','','');
+    function st_click() {
+        insert_data('pass', '', '');
         reset();
 
     }
-    function nd_click(){
-        insert_data('rework','pass','');
+
+    function nd_click() {
+        insert_data('rework', 'pass', '');
         reset();
     }
 
-    function fn_click(){
+    function fn_click() {
         let result = $("input[name='3rd_check']:checked").val()
-        if(result=='1'){
-            insert_data('rework','rework','pass');
-        }else{
-            insert_data('rework','rework','rework');
+        if (result == '1') {
+            insert_data('rework', 'rework', 'pass');
+        } else {
+            insert_data('rework', 'rework', 'rework');
         }
 
         reset();
 
     }
 
-    function reset(){
+    function reset() {
         $('#item_num').val("");
         $('#weight').val("");
-        $('input:radio[name="1st_check"]').each(function () { $(this).attr('checked', false); });
-        $('input:radio[name="2nd_check"]').each(function () { $(this).attr('checked', false); });
-        $('input:radio[name="3rd_check"]').each(function () { $(this).attr('checked', false); });
+        $('input:radio[name="1st_check"]').each(function() {
+            $(this).attr('checked', false);
+        });
+        $('input:radio[name="2nd_check"]').each(function() {
+            $(this).attr('checked', false);
+        });
+        $('input:radio[name="3rd_check"]').each(function() {
+            $(this).attr('checked', false);
+        });
         $("#1st_check_button").css("display", "none");
         $("#second_check").css("display", "none");
         $("#2nd_check_button").css("display", "none");
@@ -224,57 +238,67 @@
     }
 
     $(function() {
-        $( "#k_time" ).datepicker();
+        $("#k_time").datepicker();
     });
 
-    function insert_data(first,second,third){
-        let name = $( "#operator_name option:selected" ).text();
+    function insert_data(first, second, third) {
+        let name = $("#operator_name option:selected").text();
         let knitted_time = $("#k_time").val();
         let itemNumber = $("#item_num").val();
         //split item number to style code and machine id
         let str_new = itemNumber.split(/[_]/);
-        let itemNumber_sd="";
-        let itemNumber_md=""
-        if(str_new){
+        let itemNumber_sd = "";
+        let itemNumber_md = ""
+        if (str_new) {
             itemNumber_sd = str_new[0];
             itemNumber_md = str_new[1];
         }
-        if(itemNumber_sd && itemNumber_md){}else{
-            itemNumber_sd=""
-            itemNumber_md=""
+        if (itemNumber_sd && itemNumber_md) {} else {
+            itemNumber_sd = ""
+            itemNumber_md = ""
         }
 
 
-        let weight =$("#weight").val();
+        let weight = $("#weight").val();
         let dt = new Date();
-        let current_time = dt.getFullYear()+'-'+(dt.getMonth()+1)+'-'+dt.getDate();
+        let current_time = dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate();
 
 
         $.ajax({
             url: 'php/previewQC.php',
             type: 'POST',
-            data:{DateRec:current_time,Name:name,styleCode:itemNumber_sd,machineId:itemNumber_md,Weight:weight,FirstCheck:first,SecondCheck:second,ThirdCheck:third,KnittedTime:knitted_time,},
-            success: function(data){
+            data: {
+                DateRec: current_time,
+                Name: name,
+                styleCode: itemNumber_sd,
+                machineId: itemNumber_md,
+                Weight: weight,
+                FirstCheck: first,
+                SecondCheck: second,
+                ThirdCheck: third,
+                KnittedTime: knitted_time,
+            },
+            success: function(data) {
                 let new_data = JSON.parse(data);
                 realtimeDisplay(new_data);
             },
-            error: function(){
+            error: function() {
                 alert('Error loading XML document');
             }
         });
 
     }
 
-    function realtimeDisplay(qc_data){
+    function realtimeDisplay(qc_data) {
         let content_html = "";
-        let content ='<tr><td>'+qc_data[0]['DateRec']+'</td><td>' +qc_data[0]['Name'] + '</td><td>' + qc_data[0]['itemNum']+'</td><td>'+ qc_data[0]['MachineId']+'</td><td>'+qc_data[0]['Weight']+'</td><td>'+ qc_data[0]['KnittedTime']+'</td><td>'+qc_data[0]['FirstCheck']+'</td><td>'+qc_data[0]['SecondCheck']+'</td><td>'+qc_data[0]['ThirdCheck']+'</td><td>'+"<button onclick = deleterow(this)>Delete</button></td></tr>";
+        let content = '<tr><td>' + qc_data[0]['DateRec'] + '</td><td>' + qc_data[0]['Name'] + '</td><td>' + qc_data[0]['itemNum'] + '</td><td>' + qc_data[0]['MachineId'] + '</td><td>' + qc_data[0]['Weight'] + '</td><td>' + qc_data[0]['KnittedTime'] + '</td><td>' + qc_data[0]['FirstCheck'] + '</td><td>' + qc_data[0]['SecondCheck'] + '</td><td>' + qc_data[0]['ThirdCheck'] + '</td><td>' + "<button onclick = deleterow(this)>Delete</button></td></tr>";
         content_html += content + '\n';
-        for(let i = 1; i < qc_data.length; i++){
-            let content ='<tr><td>'+qc_data[i]['DateRec']+'</td><td>' +qc_data[i]['Name'] + '</td><td>' + qc_data[i]['itemNum']+'</td><td>'+ qc_data[i]['MachineId']+'</td><td>'+qc_data[0]['Weight']+'</td><td>'+ qc_data[i]['KnittedTime']+'</td><td>'+qc_data[i]['FirstCheck']+'</td><td>'+qc_data[i]['SecondCheck']+'</td><td>'+qc_data[i]['ThirdCheck']+'</td><td>';
+        for (let i = 1; i < qc_data.length; i++) {
+            let content = '<tr><td>' + qc_data[i]['DateRec'] + '</td><td>' + qc_data[i]['Name'] + '</td><td>' + qc_data[i]['itemNum'] + '</td><td>' + qc_data[i]['MachineId'] + '</td><td>' + qc_data[0]['Weight'] + '</td><td>' + qc_data[i]['KnittedTime'] + '</td><td>' + qc_data[i]['FirstCheck'] + '</td><td>' + qc_data[i]['SecondCheck'] + '</td><td>' + qc_data[i]['ThirdCheck'] + '</td><td>';
             content_html += content + '\n';
         }
 
-        document.getElementById("qc_table_body").innerHTML =content_html;
+        document.getElementById("qc_table_body").innerHTML = content_html;
     }
 
     function deleterow(el) {
@@ -284,17 +308,16 @@
             $.ajax({
                 url: 'php/previewQC_edit.php',
                 type: 'POST',
-                success: function(data){
-                },
-                error: function(){
+                success: function(data) {},
+                error: function() {
                     alert('Error loading XML document');
                 }
             });
-        } else {
-        }
+        } else {}
 
 
 
     }
 </script>
+
 </html>
