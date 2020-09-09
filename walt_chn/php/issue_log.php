@@ -30,12 +30,12 @@ if( $conn === false )
 
         	$result = sqlsrv_query($conn, $sql);
             while($row = sqlsrv_fetch_array($result)) {
-                 $new['sender'] = $row['sender'];
-                 $new['receiver'] = $row['receiver'];
-                 $new['details'] = $row['details'];
-                 $new['machCode'] = $row['machCode'];
-                 $new['stopCode'] = $row['stopCode'];
-                 $new['FileName'] = $row['FileName'];
+                 $new['sender'] = iconv("GBK","UTF-8",$row['sender']); //中文转码
+                 $new['receiver'] = iconv("GBK","UTF-8",$row['receiver']); //中文转码
+                 $new['details'] = iconv("GBK","UTF-8",$row['details']); //中文转码
+                 $new['machCode'] = iconv("GBK","UTF-8",$row['machCode']); //中文转码
+                 $new['stopCode'] = iconv("GBK","UTF-8",$row['stopCode']); //中文转码
+                 $new['FileName'] = iconv("GBK","UTF-8",$row['FileName']); //中文转码
 
                  if($row['dateRec']){
                     $new['dateRec'] = $row['dateRec']->format('yy-m-d H:i:s');

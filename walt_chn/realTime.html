@@ -194,7 +194,7 @@
                     <div class="form-group row">
                         <label for="fileName" class="col-sm-2 col-form-label">文件名</label>
                         <div class="col-sm-10">
-                            <input type="text" name='post_FileName' class="col-xs-2" id='fileName' @input="onInput" placeholder="输入上传文件名称...">
+                            <input type="text" name='post_FileName' readonly="readonly" unselectable="on" class="col-xs-2" id='fileName' @input="onInput" placeholder="上传后文件名称...">
                         </div>
 
                     </div>
@@ -254,6 +254,7 @@
             start_time = '20:00:00'
         }
 
+
         $.ajax({
             url: 'php/issue_log.php',
             type: 'POST',
@@ -268,7 +269,6 @@
 
             },
             error: function() {
-
                 alert('Error loading XML document');
             }
         })
@@ -366,9 +366,11 @@
                 data: fd,
                 contentType: false,
                 processData: false,
-                success: function(response) {
+                success: function(response) { //response改为返回文件名（相对路径不对）
+                    console.log("res:" + response);
                     if (response != 0) {
-                        $("#img").attr("src", response);
+                        $("#pic").attr("src", "upload/" + response);
+                        $("#fileName").val(response);
                     } else {
                         alert('file not uploaded');
                     }
