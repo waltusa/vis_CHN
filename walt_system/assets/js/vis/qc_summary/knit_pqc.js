@@ -10,7 +10,7 @@ $(function() {　　
     $("#summary_k_time").val((todayNow.getMonth() + 1) + "/" + todayNow.getDate() + "/" + todayNow.getFullYear());
 
 
-    knit_pqc_enquire();
+    //knit_pqc_enquire();
 
     var name = getCookie("name");
     if (name) {
@@ -54,6 +54,7 @@ function knitPQC_qc() {
     let k_other = $('#machine_other').val() ? $('#machine_other').val() : 0
     let k_marks = $('#remark').val();
     let current_day = getCurrDate();
+    let defects_picture_name = $( "#defects_picture option:selected" ).text();
 
     ///set knit day and shift
     let shift;
@@ -74,7 +75,7 @@ function knitPQC_qc() {
 
     var r = confirm("汇报人：" + k_name + "，\n检查完毕，确认提交？");
     if (r) {
-        console.log(k_id);
+        var picture1=compressImageTobase64(document.getElementById("preLookImg"),400,200,90);
         setCookie("name", k_id);
         $.ajax({
             url: '../assets/php/knit_pqc.php',
@@ -95,34 +96,39 @@ function knitPQC_qc() {
                 k_style: k_style,
                 k_size: k_size,
                 k_color: k_color,
-                k_marks: k_marks
+                k_marks: k_marks,
+                picture1:picture1,
+                defects_picture_name:defects_picture_name
             },
             success: function(data) {
-                let new_data = JSON.parse(data);
-                console.log(new_data)
-                let data_list_1 = new_data.filter(d => parseInt(d['MachineId']) > 0 && parseInt(d['MachineId']) < 25)
-                let data_list_2 = new_data.filter(d => parseInt(d['MachineId']) >= 25 && parseInt(d['MachineId']) < 50)
-                let data_list_3 = new_data.filter(d => parseInt(d['MachineId']) >= 50 && parseInt(d['MachineId']) < 75)
-                let data_list_4 = new_data.filter(d => parseInt(d['MachineId']) >= 75)
-                draw_graph(data_list_1, 'list_1');
-                draw_graph(data_list_2, 'list_2');
-                draw_graph(data_list_3, 'list_3');
-                draw_graph(data_list_4, 'list_4');
-                //add record
-                let content_html = "";
-                for (let i = 0; i < new_data.length; i++) {
-                    let content = '<tr><td>' + new_data[i]['DateRec'] + '</td><td>' + new_data[i]['Name'] + '</td><td>' + new_data[i]['MachineId'] + '</td><td>' + new_data[i]['ItemStyle'] + '</td><td>' + new_data[i]['Color'] + '</td><td>' + new_data[i]['Size'] + '</td><td>' +
-                        new_data[i]['toeHole'] + '</td><td>' + new_data[i]['brokenNDL'] + '</td><td>' + new_data[i]['missYarn'] + '</td><td>' + new_data[i]['fanYarn'] + '</td><td>' + new_data[i]['logoIssue'] + '</td><td>' + new_data[i]['dirty'] + '</td><td>' + new_data[i]['other'] + '</td><td>' + new_data[i]['Comments'] + '</td><td>';
-                    content_html += content + '\n';
+                alert(data)
+                if(data){
+                    let new_data = JSON.parse(data);
+                    let data_list_1 = new_data.filter(d => parseInt(d['MachineId']) > 0 && parseInt(d['MachineId']) < 25)
+                    let data_list_2 = new_data.filter(d => parseInt(d['MachineId']) >= 25 && parseInt(d['MachineId']) < 50)
+                    let data_list_3 = new_data.filter(d => parseInt(d['MachineId']) >= 50 && parseInt(d['MachineId']) < 75)
+                    let data_list_4 = new_data.filter(d => parseInt(d['MachineId']) >= 75)
+                    draw_graph(data_list_1, 'list_1');
+                    draw_graph(data_list_2, 'list_2');
+                    draw_graph(data_list_3, 'list_3');
+                    draw_graph(data_list_4, 'list_4');
+                    //add record
+                    let content_html = "";
+                    for (let i = 0; i < new_data.length; i++) {
+                        let content = '<tr><td>' + new_data[i]['DateRec'] + '</td><td>' + new_data[i]['Name'] + '</td><td>' + new_data[i]['MachineId'] + '</td><td>' + new_data[i]['ItemStyle'] + '</td><td>' + new_data[i]['Color'] + '</td><td>' + new_data[i]['Size'] + '</td><td>' +
+                            new_data[i]['toeHole'] + '</td><td>' + new_data[i]['brokenNDL'] + '</td><td>' + new_data[i]['missYarn'] + '</td><td>' + new_data[i]['fanYarn'] + '</td><td>' + new_data[i]['logoIssue'] + '</td><td>' + new_data[i]['dirty'] + '</td><td>' + new_data[i]['other'] + '</td><td>' + '<img style="width: 400px; height: 200px" src = "../defect_pictures/" +new_data[i][\'Comments\']+>' + '</td><td>';
+                        content_html += content + '\n';
+                    }
+                    document.getElementById("error_summary_table").innerHTML = content_html;
+                    updateMachineAndStyle()
                 }
-                document.getElementById("error_summary_table").innerHTML = content_html;
-                updateMachineAndStyle()
             },
             error: function() {
                 alert('Error loading XML document');
             }
         });
         //reset
+
         $('#machine_id').val("");
         $('#machine_style').val("");
         $('#machine_color').val("");
@@ -135,13 +141,27 @@ function knitPQC_qc() {
         $('#machine_dirty').val("");
         $('#machine_other').val("");
         $('#remark').val("");
+        $("#preLookImg").attr("src", '../defect_pictures/picture.png');
+
+
     }
 
 
 
 };
 
-
+function compressImageTobase64(image,width,height,qua){
+    var quality = qua ? qua / 100 : 0.8;
+    var canvas = document.createElement("canvas"),
+        ctx = canvas.getContext('2d');
+    var w = image.naturalWidth,
+        h = image.naturalHeight;
+    canvas.width = width||w;
+    canvas.height = height||h;
+    ctx.drawImage(image, 0, 0, w, h, 0, 0, width||w, height||h);
+    var data = canvas.toDataURL("image/jpeg", quality);
+    return data;
+}
 
 function getCurrDate() {
     let date = new Date();
@@ -241,7 +261,6 @@ function draw_graph(data, list_id) {
     let seriers_data = []
     let l_data_scalar = ['toeHole', 'brokenNDL', 'missYarn', 'fanYarn', 'logoIssue', 'dirty', 'other']
 
-    console.log(data)
     for (let i = 0; i < l_data.length - 1; i++) {
         let machine_data = [];
         for (let j = 0; j < machine_number.length; j++) {
@@ -401,7 +420,7 @@ function knit_pqc_enquire() {
             let content_html = "";
             for (let i = 0; i < new_data.length; i++) {
                 let content = '<tr><td>' + new_data[i]['DateRec'] + '</td><td>' + new_data[i]['Name'] + '</td><td>' + new_data[i]['MachineId'] + '</td><td>' + new_data[i]['ItemStyle'] + '</td><td>' + new_data[i]['Color'] + '</td><td>' + new_data[i]['Size'] + '</td><td>' +
-                    new_data[i]['toeHole'] + '</td><td>' + new_data[i]['brokenNDL'] + '</td><td>' + new_data[i]['missYarn'] + '</td><td>' + new_data[i]['fanYarn'] + '</td><td>' + new_data[i]['logoIssue'] + '</td><td>' + new_data[i]['dirty'] + '</td><td>' + new_data[i]['other'] + '</td><td>' + new_data[i]['Comments'] + '</td><td>';
+                    new_data[i]['toeHole'] + '</td><td>' + new_data[i]['brokenNDL'] + '</td><td>' + new_data[i]['missYarn'] + '</td><td>' + new_data[i]['fanYarn'] + '</td><td>' + new_data[i]['logoIssue'] + '</td><td>' + new_data[i]['dirty'] + '</td><td>' + new_data[i]['other'] + '</td><td>' + '<img style="width: 400px; height: 200px" src = "../defect_pictures/" +new_data[i][\'Comments\']+>' + '</td><td>';
                 content_html += content + '\n';
             }
             document.getElementById("error_summary_table").innerHTML = content_html;

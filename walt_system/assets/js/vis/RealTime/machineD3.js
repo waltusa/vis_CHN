@@ -820,7 +820,6 @@ function realtime_error_chart(error_data) {
         error_dict[error_code[i]] = { count: error_sublist.length, description: error_sublist[0]['description'], code: error_code[i] }
     }
 
-    console.log(error_dict)
     let top_10_error = Object.keys(error_dict).sort(function(a, b) {
         return error_dict[b]['count'] - error_dict[a]['count'];
     });

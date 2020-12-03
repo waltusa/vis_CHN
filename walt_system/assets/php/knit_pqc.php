@@ -16,9 +16,18 @@ $k_style = $_POST['k_style'];
 $k_color = iconv("utf-8", "gbk",$_POST['k_color']);
 $k_size = $_POST['k_size'];
 $k_marks = iconv("utf-8", "gbk",$_POST['k_marks']);
+$picture1 = $_POST['picture1'];
+$defects_picture_name = $_POST['defects_picture_name'];
 
 
 require('db_info.php'); //数据库连接信息请在这个文件里改
+
+////转化图片
+$base_img = str_replace('data:image/jpeg;base64,', '', $picture1);
+$path = "../../defect_pictures/";
+$output_file = $defects_picture_name."".rand(100,999).'.jpg';
+$path = $path.$output_file;
+file_put_contents($path, base64_decode($base_img));
 
 $conn = sqlsrv_connect( $serverName, $connectionInfo_knit);
 if( $conn === false ) {
@@ -50,7 +59,7 @@ $sql = "INSERT INTO [dbo].[knitCHN_pqc]
              VALUES
              (?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-$params = array($today, $k_name, $k_machineId,$k_style,$k_size,$k_color,$knitted_time,$k_knitted_shift,$k_Toe_hole,$k_Broken_needle,$k_Missing_yarn,$k_fan_yarn,$k_log_issue,$k_dirty,$k_other,$k_marks);
+$params = array($today, $k_name, $k_machineId,$k_style,$k_size,$k_color,$knitted_time,$k_knitted_shift,$k_Toe_hole,$k_Broken_needle,$k_Missing_yarn,$k_fan_yarn,$k_log_issue,$k_dirty,$k_other,$path);
 $stmt = sqlsrv_query( $conn, $sql, $params);
 if( $stmt === false ) {
 echo $sql;
@@ -82,7 +91,7 @@ $sql2 = "SELECT [DateRec]
 
 $result = sqlsrv_query($conn,$sql2);
 while($row = sqlsrv_fetch_array($result)){
-    $new['DateRec'] = $row['DateRec']->format('m-d H:i:s');;
+    $new['DateRec'] = $row['DateRec']->format('m-d H:i:s');
     $new['Name'] = iconv( "gbk","utf-8",$row['Name']); //中文转码
     $new['MachineId'] = $row['MachineId'];
     $new['toeHole'] = $row['toeHole'];

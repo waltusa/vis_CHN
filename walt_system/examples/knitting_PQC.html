@@ -31,6 +31,28 @@
     <link rel="stylesheet" href="../assets/css/StyleSheet.css">
 
     <style>
+        .picture{float: left;}
+
+        .getImg img{
+            display: block;
+            width: 100%; /* 高度自适应 */
+        }
+        .getImg{
+            width:100px;
+            height:100px;
+            position: relative;
+            overflow: hidden;
+        }
+        .upload_input{
+            width:100px;
+            height:100px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            opacity: 0;
+        }
         .li_fanYarn:before {
             content: "";
             width: 10px;
@@ -79,6 +101,12 @@
                             <p>质量预检</p>
                         </a>
                     </li>
+                    <li >
+                        <a href="./boarding.html">
+                            <i class="tim-icons icon-coins"></i>
+                            <p>定型质检</p>
+                        </a>
+                    </li>
                     <li>
                         <a href="./NonSkid.html">
                             <i class="tim-icons icon-user-run"></i>
@@ -119,9 +147,10 @@
                         <option value="5">其他</option>
                         <option value="6">测试-</option>
                 </select>
+
                 </div>
                 <div class="row">
-                    <div class="col-sm-6" style="width: 100%; height: 600px;margin-bottom:40px">
+                    <div class="col-sm-6" style="width: 100%; height: 680px;margin-bottom:40px">
                         <div style="width: 100%;text-align: left;height: 30px;font-size: 24px; background-color: #d8fac9;">生产信息</div>
                         <div style="width: 100%;text-align: left;height: 40px; border-bottom: #ee5424 1px dashed">
                             <label for="machine_id" style="font-size: 24px; color: #ee5424">织机:</label>
@@ -174,8 +203,30 @@
                             <input type="number" pattern="\d*" id="machine_other" name="machine_other" style="float: right;font-size: 18px" placeholder="0">
                         </div>
                         <input type="text" id="remark" style="width:100%;height:40px;font-size: 12px" placeholder="请输入备注信息">
-                        <button type="button" class="btn btn-warning" onclick="knitPQC_qc()">完成检测</button>
+                        <form id="mainForm">
+                            <div>
+                                <div >
+                                    <label for="defects_picture">次品图片原因:</label>
+                                    <select name="defects" id="defects_picture">
+                                        <option >破洞</option>
+                                        <option >断针</option>
+                                        <option >断纱</option>
+                                        <option >返纱</option>
+                                        <option >标记</option>
+                                        <option >logo</option>
+                                        <option >其他</option>
+                                    </select>
+                                    <div class="getImg">
+                                        <img style="width: 120px; height: 100px" src="../defect_pictures/picture.png" alt="" id="preLookImg">
+                                        <input class="upload_input" name="img" type="file" accept="image/*" capture="camera" onchange="getImg(this,'#preLookImg')"/>
+                                    </div>
+                                </div>
 
+                            </div>
+                        </form>
+
+
+                        <button type="button" class="btn btn-warning" onclick="knitPQC_qc()">完成检测</button>
 
                     </div>
                     <div class="col-sm-6" style="width: 100%; height: 600px; border: #0e84f8 1px solid">
@@ -205,6 +256,7 @@
                         </div>
                     </div>
                 </div>
+
                 <hr style="background-color: #cd23b2">
                 <p style="text-align: center">预检测数据库查询</p>
                 <table class="table">
@@ -265,8 +317,6 @@
                 for (let i = 2; i < 91; i++) {
                     if (i == 31) continue;
                     cnt++;
-                    console.log(i + "," + cnt + "," + machineAndStyle[cnt].style);
-
                     if (machineAndStyle[cnt].style == 'xx' && !$('#id_all')[0].checked) continue;
                     selectbox.append($('<option>').text(i).val(i));
                 }
@@ -289,10 +339,7 @@
             document.getElementById('machine_color').value = "";
             document.getElementById('machine_size').value = "";
         }
-        console.log(machineAndStyle);
     }
-
-    ///add machine id to select box
 
     //read txt file for machine information
     $('#machine_id').on('change', updateStyle);
@@ -306,6 +353,26 @@
         $('#k_time').datepicker();
         $('#summary_k_time').datepicker();
     });
+
+    //upload picture
+    var file_name =''
+    //获取图片
+    function getImg(file,id) {
+        let that = this
+        var prevDiv = document.querySelector(id);
+
+        // * 使用IE浏览器的话此处可能获取不到 file.files；只能获取到 file.value
+        if (file.files && file.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+                file_name = evt.target.result
+                prevDiv.setAttribute('src', evt.target.result)
+            }
+            reader.readAsDataURL(file.files[0]); // 读取文件 file.files[0]
+        }
+    }
+// 上传图片
+
 </script>
 
 </html>
