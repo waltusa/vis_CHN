@@ -1,0 +1,427 @@
+<!--
+=========================================================
+* * Black Dashboard - v1.0.1
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/black-dashboard
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <title>
+        实时数据 - WaltCN Data Visualization System
+    </title>
+    <!--     Fonts and icons     -->
+    <!-- Nucleo Icons -->
+    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="../assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="../assets/css/StyleSheet.css">
+
+    <style>
+
+        .tableRealtimeUnfixedError {
+            overflow-y: auto;
+            height: 280px;
+        }
+        
+        .tableRealtimeUnfixedError thead th {
+            position: sticky;
+            top: 0;
+        }
+        
+        .tableRealtimeUnfixedError td {
+            border: 1px solid #ee5f5f;
+        }
+        
+        .table_product {
+            overflow-y: auto;
+            height: 180px;
+        }
+        
+        .table_product td {
+            border-bottom: 1px solid #d79c9c;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        th,
+        td {
+            padding: 3px 16px;
+        }
+    </style>
+
+</head>
+
+<body class="">
+    <div class="wrapper">
+
+        <div class="sidebar">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
+    -->
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="" class="simple-text logo-mini">
+            LLC
+          </a>
+                    <a href="https://waltusa.us/" class="simple-text logo-normal">
+            华尔集团
+          </a>
+                </div>
+                <ul class="nav">
+                    <li class="active ">
+                        <a href="./dashboard.html">
+                            <i class="tim-icons icon-chart-pie-36"></i>
+                            <p>实时数据</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./database.html">
+                            <i class="tim-icons icon-laptop"></i>
+                            <p>数据库查询</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./knitting_PQC.html">
+                            <i class="tim-icons icon-coins"></i>
+                            <p>质量预检</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./NonSkid.html">
+                            <i class="tim-icons icon-user-run"></i>
+                            <p>防滑质检(暂时不用)</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./Paring.html">
+                            <i class="tim-icons icon-zoom-split"></i>
+                            <p>配袜质检(暂时不用)</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./Package.html">
+                            <i class="tim-icons icon-gift-2"></i>
+                            <p>包装质检(暂时不用)</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./icons.html">
+                            <i class="tim-icons icon-atom"></i>
+                            <p>Icons</p>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm" style="border: #2dc6e3 2px solid; height: 26px;margin-left: 15px">
+                        <p style="text-align: left;color: #17d0c1">时间： <span id="times"></span></p>
+                    </div>
+                    <div class="col-sm" style=" height: 26px;margin-left: 15px">
+                        <div style="font-size: 1.8vh;color: #00b21e">运行机台数-<span style="font-size: 1.8vh" id='ms_run'></span></div>
+                    </div>
+                    <div class="col-sm" style=" height: 26px;margin-left: 15px">
+                        <div style="font-size: 1.8vh;color:#f11212">故障机台数-<span style="font-size: 1.8vh" id='ms_stop'></span></div>
+                    </div>
+                    <div class="col-sm" style=" height: 26px;margin-left: 15px">
+                        <div style="font-size: 1.8vh;color:#f8d60c">关机台数-<span style="font-size: 1.8vh" id='ms_off'></span></div>
+                    </div>
+                    <div class="col-sm" style=" height: 26px;margin-left: 15px">
+                        <div style="font-size: 1.8vh;color:#e54be3">离线台数-<span style="font-size: 1.8vh" id='ms_line'></span></div>
+                    </div>
+                    <div class="col-sm" style=" height: 26px;margin-left: 15px">
+                        <div style="font-size: 1.8vh;color:#b38576">不同步台数-<span style="font-size: 1.8vh" id='ms_ns'></span></div>
+                    </div>
+
+                    <div class="col-sm">
+
+                        <button type="button" class="btn btn-info btn-sm" onclick="flag_1()">机台：01~45</button>
+
+                    </div>
+                    <div class="col-sm">
+                        <button type="button" class="btn btn-info btn-sm" onclick="flag_46()">机台：46~90</button>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="card card-chart" style="width: 100%; height: 450px">
+                            <div class="card-body">
+                                <span style="color: #ee5424;">机器状况:(平均效率<span style="font-size: 1.4vh" id='ms_avg'></span>)</span>
+                                <div class="row" style="width: 100%; height: 160px;" id='machine_summary'></div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <span style="color: #ee5424;font-size: 1.5vh">前10故障分布</span>
+                                        <div id="error_summary" ; style="width: 100%; height: 140px;">
+                                        </div>
+
+                                            <p style="font-size: 1.4vh;color: #a1e3d7">停机中: <span id='error_happening' style="font-size: 1.34vh;color: #e73860"> </span></p>
+                                            <p style="font-size: 1.4vh;color: #3d7">故障总计: <span id='error_happened' style="font-size: 1.34vh;color: #ec5813"></span></p>
+                                            <p style="font-size: 1.4vh;color: #a1e3d7">前5故障率机器: <span id='error_id' style="font-size: 1.5vh;color: #ee59df"></span></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span style="color: #ee5424;font-size: 1.5vh">质量预检</span>
+                                        <div id='defects_summary' style="width: 100%; height: 190px;">
+                                        </div>
+
+                                            <p style="color: #c18c7c;font-size: 1.5vh">前5次品数机器: </p>
+                                            <div id='top_5_defects_machine' style="color: #a47cc1;font-size: 1.5vh"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6" ;>
+                        <div class="card card-chart" style="width: 100%; height: 450px">
+                            <div class="card-header">
+
+                                <h3 class="card-title"><i class="tim-icons icon-vector text-info"></i> <span id="total_pieces" style="font-size: 0.8vw"></span></h3>
+
+                            </div>
+                            <div class="card-body">
+                                <div id='production' ; class="chart-area" style="height: 160px">
+                                </div>
+
+                                <div class="table_product" id="real_style_table">
+                                    <table>
+                                        <thead>
+                                            <tr style="font-size: 1.2vh; ">
+                                                <th scope="col" style="color: #2254b8">产品型号</th>
+                                                <th scope="col" style="color: #18c657">产量（只）</th>
+                                                <th scope="col" style="color: #22cab7">机器数量</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="real_style_table_body" style=" color: #e7acac;font-size: 1.2vh; cursor: pointer;">
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card card-chart" style="width: 95%; height: 450px">
+                            <div class="card-header">
+                                <span style="font-size: 1.2vh;color:#f10606" class="card-category">实时故障列表</span>
+                            </div>
+                            <div class="tableRealtimeUnfixedError" id="unfixed">
+                                <table>
+                                    <thead>
+                                        <tr style="color: #069ff1; font-size: 1.0vh">
+                                            <th scope="col">机号</th>
+                                            <th scope="col">故障</th>
+                                            <th scope="col">日期</th>
+                                            <th scope="col">描述</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="unfixed_body" style=" color: #e7425b;font-size: 0.6vw; cursor: pointer;">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id='error_summary_machines' style="width:99%;height:180px"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card card-chart">
+                            <div class="card-body">
+                                <div id='center_area' class="row">
+                                    <div id='machine_d3' class="col-md-5"></div>
+                                    <div class="col-md-7">
+                                        <div id='efficiency' ; style="width: 100%; height: 160px;"></div>
+                                        <div class="row" style="border:1px solid; color:#d8e3d5;width:98%;margin-top: 1%;margin-left: 1%">
+                                            <div class="col-md-2" style="color: #cd23b2; width: 100%; height: 160px;">
+                                                <span style="font-size: 1.5vh;text-align: center">机器编号</span>
+                                                <br>
+                                                <div style="text-align: center; font-size: 1.5vw" id="real_machine_id"></div>
+                                                <span style="font-size: 1.5vh;text-align: center">状态</span>
+                                                <div style="text-align: center; font-size: 1.0vw" id="real_machine_status"></div>
+                                            </div>
+                                            <div class="col-md-3" style=" border-left:1px solid; ;color: #b6ea61;width: 100%; height: 160px;">
+                                                <span style="font-size: 1.5vh;text-align: center">基本信息</span>
+                                                <div>
+                                                    <div style="font-size: 1.5vh">生产效率:<span id='real_machine_workE' style="color: navajowhite"></span></div>
+                                                    <div style="font-size: 1.5vh">开机效率:<span id='real_machine_timeE' style="color: navajowhite"></span></div>
+                                                    <div style="font-size: 1.5vh">产品型号:<span id='real_machine_style' style="color: navajowhite"></span></div>
+                                                    <div style="font-size: 1.5vh">产量(只):<span id='real_machine_pieces' style="color: navajowhite"></span></div>
+                                                    <div style="font-size: 1.5vh">故障次数:<span id='real_machine_errors' style="color: navajowhite"></span></div>
+                                                    <div style="font-size: 1.5vh">预检次数:<span id='real_machine_pqc' style="color: navajowhite"></span></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3" style="border-left:1px solid; ;color: #c3e9e2; width: 100%; height: 160px;">
+                                                <span style="font-size: 1.6vh;text-align: center">次品数:<span id='defects_total'></span> </span>
+                                                <div>
+                                                    <div style="color: #2471a3; font-size: 1.4vh">破洞:<span id='real_machine_toeHole' style="color: #2471a3"></span></div>
+                                                    <div style="color: #138d75; font-size: 1.4vh">断针:<span id='real_machine_brok' style="color: #138d75"></span></div>
+                                                    <div style="color: #D68910; font-size: 1.4vh">断纱:<span id='real_machine_yarn' style="color: #D68910"></span></div>
+                                                    <div style="color: #3ecaaa; font-size: 1.4vh">返纱:<span id='real_machine_fanYarn' style="color: #3ecaaa"></span></div>
+                                                    <div style="color: #FF5733; font-size: 1.4vh">商标:<span id='real_machine_issue' style="color: #FF5733"></span></div>
+                                                    <div style="color: #3db005; font-size: 1.4vh">污渍:<span id='real_machine_dirty' style="color: #3db005"></span></div>
+                                                    <div style="color: #9B59B6; font-size: 1.4vh">其他:<span id='real_machine_other' style="color: #9B59B6"></span></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4" style="border-left:1px solid; ; color: #f18e4c; width: 100%; height: 160px;">
+                                                <span style="font-size: 1.5vh;text-align: center;">故障分布</span>
+                                                <div id='machine_stop' style="width: 100%; height:160px"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <link rel="Stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
+    <script type="text/javascript" src="../assets/js/library/echarts.js"></script>
+    <<script src="https://d3js.org/d3.v3.min.js"></script>
+        <script type="text/javascript" src='../assets/js/vis/RealTime/machineD3.js'></script>
+</body>
+
+<script type="text/javascript">
+    //得到时间并写入div
+
+
+    var start_machine = 1;
+    var end_machine = 45;
+
+    function flag_1() {
+        start_machine = 1;
+        end_machine = 45;
+        getting(start_machine, end_machine)
+    }
+
+    function flag_46() {
+        start_machine = 46
+        end_machine = 90
+        getting(start_machine, end_machine)
+    }
+
+
+    function showclock() {
+        var outStr = "";
+        var date = new Date();
+        var y_m_d = (date.getMonth() + 1) + '-' + date.getDate()
+        var hour = date.getHours();
+        var min_ = date.getMinutes();
+        var sec = date.getSeconds();
+        var col = ":";
+        var spc = " ";
+        //时分秒小于10的时候在前面添加个0
+        if (hour < 10) hour = "0" + hour;
+        if (min_ < 10) min_ = "0" + min_;
+        if (sec < 10) sec = "0" + sec;
+        outStr = y_m_d + ' ' + hour + col + min_ + col + sec + spc;
+        document.getElementById("times").innerHTML = outStr;
+    }
+    setInterval("showclock()", 1000);
+
+
+    //get data
+    let getting = function(a, b) {
+
+        let today = new Date();
+        let time = today.getHours();
+        let month = today.getMonth() + 1;
+        let date = today.getFullYear() + '-' + month + '-' + today.getDate();
+
+        // select machines
+        // let machine_start = $('#machine_st').val();
+        // let machine_end = $('#machine_ed').val();
+
+        let start_date;
+        let start_time;
+        if (parseInt(time) >= 7 && parseInt(time) < 19) {
+            start_date = today.getFullYear() + '-' + month + '-' + today.getDate();
+            start_time = '08:00:00'
+        } else {
+            let day = today.getDate();
+            start_date = today.getFullYear() + '-' + month + '-' + day;
+            start_time = '20:00:00'
+        }
+        $.ajax({
+            url: '../assets/php/realTimeError.php',
+            type: 'POST',
+            data: {
+                start_date: start_date,
+                start_time: start_time,
+                machine_start: start_machine,
+                machine_end: end_machine
+            },
+            success: function(data) {
+                let new_data = JSON.parse(data);
+
+                reset();
+
+                realTime_machine_d3(new_data)
+
+                machine_status(new_data['machine'])
+
+                ///real_time error chart
+                realtime_error_chart(new_data['error'])
+
+                //realTime machine status_efficiency
+                realTime_machine_efficiency(new_data['machine'])
+
+                ///realTime machine status_production
+                realTime_machine_production(new_data['machine'])
+
+                ///realtime defects summary
+                realTime_defects(new_data['defects'])
+
+                unfixed_error(new_data['error'])
+
+                //error summary on machine
+                error_summary_machine(new_data['error'])
+
+            },
+            error: function() {
+
+                alert('Error loading XML document');
+            }
+        })
+    }
+
+
+
+    ///////////////run php
+    getting(start_machine, end_machine);
+    setInterval(getting(start_machine, end_machine), 20000);
+</script>
+
+</html>

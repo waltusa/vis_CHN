@@ -1,0 +1,319 @@
+<!--
+=========================================================
+* * Black Dashboard - v1.0.1
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/black-dashboard
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+        WaltCN Data Visualization System
+    </title>
+    <!--     Fonts and icons     -->
+    <!-- Nucleo Icons -->
+    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="../assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="../assets/css/StyleSheet.css">
+
+    <style>
+        h5 {
+            font-size: 0.8vw;
+        }
+        
+        .tableFixHead thead th {
+            position: sticky;
+            top: 0;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        th,
+        td {
+            padding: 8px 21px;
+        }
+    </style>
+</head>
+
+<body class="">
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="" class="simple-text logo-mini">
+                    LLC
+                </a>
+                    <a href="https://waltusa.us/" class="simple-text logo-normal">
+                    华尔集团
+                </a>
+                </div>
+                <ul class="nav">
+                    <li>
+                        <a href="./dashboard.html">
+                            <i class="tim-icons icon-chart-pie-36"></i>
+                            <p>实时数据</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./database.html">
+                            <i class="tim-icons icon-laptop"></i>
+                            <p>数据库查询</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./knitting_PQC.html">
+                            <i class="tim-icons icon-coins"></i>
+                            <p>质量检测</p>
+                        </a>
+                    </li>
+                    <li class="active ">
+                        <a href="./NonSkid.html">
+                            <i class="tim-icons icon-user-run"></i>
+                            <p>防滑质检(暂时不用)</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./Paring.html">
+                            <i class="tim-icons icon-zoom-split"></i>
+                            <p>配袜质检(暂时不用)</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./Package.html">
+                            <i class="tim-icons icon-gift-2"></i>
+                            <p>包装质检(暂时不用)</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./icons.html">
+                            <i class="tim-icons icon-atom"></i>
+                            <p>Icons</p>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-plain">
+                            <div class="card-header" style="font-size:1.0vw;">
+                                NonSkid Quality Check Form
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="col-md-10">
+                                            <h5 style="color: white"><strong>Name</strong></h5>
+                                            <select class="form-control" id="ns_name" style="background-color: #f9fcfc;color: #0c0a0a;font-size: 14px">
+                                            <option>Other</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="col-md-10">
+                                            <h5><strong>Style Code</strong></h5>
+                                            <input class="custom-select" type="text" id="ns_style" style="background-color: white;color: #0a0c0d">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="col-md-10">
+                                            <h5 style="color: white"><strong>Machine</strong></h5>
+                                            <input type="text" class="form-control" id="ns_machineId" style="background-color: white;color: #0a0c0d">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="col-md-12">
+                                            <h5 style="color: white"><strong>Knitted Date</strong></h5>
+                                            <input readonly="readonly" class="custom-select" type="text" id="ns_time" style="background-color: #f9fcfc;color: #0c0a0a;font-size: 0.8vw">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="col-md-10">
+                                            <h5 style="color: white"><strong>Shift</strong></h5>
+                                            <select id="ns_time_shift" class="custom-select" style="background-color: #f9fcfc;color: #0c0a0a;font-size: 0.8vw">
+                                            <option value='08:00:00'>08:00:00</option>
+                                            <option value='20:00:00'>20:00:00</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <br>
+                                        <br>
+                                        <p>
+                                            <label for="ns_Toe_hole" style="font-size: 1.5vw;color:#3e5dd7;">Toe Hole:</label>
+                                            <input style="color:#151010;float: right" id='ns_Toe_hole' value="" min="0" max="1000" step="0.5" type="number" data-decimals="1" />
+                                        </p>
+                                        <p>
+                                            <label for="ns_broken_needle" style="font-size: 1.3vw;color:#13734e;">Broken NDL:</label>
+                                            <input style="color:#151010;float: right" id='ns_broken_needle' value="" min="0" max="1000" step="0.5" type="number" data-decimals="1" />
+                                        </p>
+                                        <p>
+                                            <label for="ns_missing_yarn" style="font-size: 1.5vw;color:#d69114; ">Miss Yarn:</label>
+                                            <input style="color:#151010; float: right" id='ns_missing_yarn' value="" min="0" max="1000" step="0.5" type="number" data-decimals="1" />
+                                        </p>
+                                        <p>
+                                            <label for="ns_logo_issue" style="font-size: 1.3vw;color:#dd5721;">Logo Issue:</label>
+                                            <input style="color:#151010; float: right" id='ns_logo_issue' value="" min="0" max="1000" step="0.5" type="number" data-decimals="1" />
+                                        </p>
+                                        <p>
+                                            <label for="ns_other" style="font-size: 1.5vw;color:#bb3bd7;">Other:</label>
+                                            <input style="color:#151010;float: right" id='ns_other' value="" min="0" max="1000" step="0.5" type="number" data-decimals="1" />
+                                        </p>
+                                        <p>
+                                            <label for="ns_dirty" style="font-size: 1.5vw;">Dirty:</label>
+                                            <input style="color:#151010;float: right" id='ns_dirty' value="" min="0" max="1000" step="0.5" type="number" data-decimals="1" />
+                                        </p>
+                                        <p>
+                                            <label for="ns_product" style="font-size: 1.5vw;color: #28a745;">Weights (kg):</label>
+                                            <input style="color:#151010;float: right" id='ns_product' value="" min="0" max="1000" step="0.5" type="number" data-decimals="1" />
+                                        </p>
+
+                                        <div class="col-md" style="text-align: center;">
+                                            <br>
+                                            <br>
+                                            <button type="button" class="btn btn-warning" onclick="nonSkid_reset()">Reset</button>
+                                            <button type="button" class="btn btn-info" onclick="nonSkid_qc()">Submit</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 " ; style=" border-left:1px solid #a2d999;margin-top: 1%">
+                                        <p style="text-align: center; font-size: 1.5vw">NonSkid Data Summary <i type="button" class="tim-icons icon-paper" id="save-btn"></i></p>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="row">
+                                                    <div class="col-md-5" style="color:#d73e80;">
+                                                        <label id="ns_start_date" for="ns_start" style="font-size: 1vw;color:#d73e80;">ST Date</label>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <input class="custom-select" type="text" id="ns_start" style="background-color: #f9fcfc;color: #0c0a0a;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="row">
+                                                    <div class="col-md-5" style="color:#d73e80;font-size: 1vw">
+                                                        <label id="ns_end_date" for="ns_end" style="font-size: 1vw;color:#d73e80;">ED Date</label>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <input class="custom-select" type="text" id="ns_end" style="background-color: #f9fcfc;color: #0c0a0a;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="row">
+                                                    <div class="col-md-4" style="color:#d73e80;font-size: 1vw">Style</div>
+                                                    <div class="col-md-7">
+                                                        <select class="form-control" id="ns_style_menu" style="background-color: #f9fcfc;color: #0c0a0a;">
+                                                        <option>All Styles Item</option>
+                                                    </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button type="button" class="btn btn-success" onclick="summary_enquire()">INQ</button>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div id='paring_chart_1' ; style="width: 99%;height: 250px;"></div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div id='paring_chart_2' ; style="width: 99%;height: 250px;"></div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div id='paring_chart_4' ; style="width: 99%;height: 250px;"></div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div id="machine_defects" style="width: 90%;height: 160px; margin-right: 2%"></div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div id='paring_chart_3' ; style="width: 99%;height: 200px;margin-right: 2%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr style="background-color: white">
+                                <div class="row">
+                                    <table class="table-responsive">
+                                        <thead>
+                                            <tr style="color: #059b1d; font-size: 13px">
+                                                <th scope="col">Rank #</th>
+                                                <th scope="col">Recorded Date</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Item style Code</th>
+                                                <th scope="col">Machine ID</th>
+                                                <th scope="col">Knitted Date</th>
+                                                <th scope="col">Knitted Shift</th>
+                                                <th scope="col">Toe Hole</th>
+                                                <th scope="col">Broken Needle</th>
+                                                <th scope="col">Missing Yarn</th>
+                                                <th scope="col">Logo Issue</th>
+                                                <th scope="col">Other</th>
+                                                <th scope="col">Dirty</th>
+                                                <th scope="col">Weights(kg)</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="nonSkid_table_database_body" style="color: #faf8f6;font-size: 13px">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../assets/js/library/echarts.js"></script>
+    <link rel="Stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
+    <script type="text/javascript" src="../assets/js/vis/qc_summary/qc_general_function.js"></script>
+    <script type="text/javascript" src="../assets/js/vis/qc_summary/qc_functions.js"></script>
+    <script type="text/javascript" src="../assets/js/library/FileSaver.js"></script>
+    <script type="text/javascript" src="../assets/js/library/echarts.js"></script>
+    <script type="text/javascript" src="../assets/js/vis/qc_summary/nonskid.js"></script>
+
+</body>
+<script>
+    //date picker
+    $(function() {
+        $('#ns_time').datepicker();
+        $('#ns_start').datepicker();
+        $('#ns_end').datepicker();
+    });
+
+    //summary query
+</script>
+
+</html>

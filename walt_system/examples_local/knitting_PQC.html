@@ -1,0 +1,311 @@
+<!--
+=========================================================
+* * Black Dashboard - v1.0.1
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/black-dashboard
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+        质量预检 - WaltCN Data Visualization System
+    </title>
+    <!--     Fonts and icons     -->
+    <!-- Nucleo Icons -->
+    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="../assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="../assets/css/StyleSheet.css">
+
+    <style>
+        .li_fanYarn:before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            display: inline-block;
+            border-radius: 50%;
+            background: #3bd7c0;
+            vertical-align: middle;
+            margin-right: 14px;
+        }
+        
+        .table td {
+            border-bottom: 1px solid #d79c9c;
+        }
+    </style>
+</head>
+
+<body class="">
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="" class="simple-text logo-mini">
+                    LLC
+                </a>
+                    <a href="https://waltusa.us/" class="simple-text logo-normal">
+                    华尔集团
+                </a>
+                </div>
+                <ul class="nav">
+                    <li>
+                        <a href="./dashboard.html">
+                            <i class="tim-icons icon-chart-pie-36"></i>
+                            <p>实时数据</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./database.html">
+                            <i class="tim-icons icon-laptop"></i>
+                            <p>数据库查询</p>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="./knitting_PQC.html">
+                            <i class="tim-icons icon-coins"></i>
+                            <p>质量预检</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./NonSkid.html">
+                            <i class="tim-icons icon-user-run"></i>
+                            <p>防滑质检(暂时不用)</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./Paring.html">
+                            <i class="tim-icons icon-zoom-split"></i>
+                            <p>配袜质检(暂时不用)</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./Package.html">
+                            <i class="tim-icons icon-gift-2"></i>
+                            <p>包装质检(暂时不用)</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./icons.html">
+                            <i class="tim-icons icon-atom"></i>
+                            <p>Icons</p>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <div class="content">
+                <div>
+                    <label for="machine_staff" style="font-size: 20px;color: wheat">车间PQC汇报----姓名:</label>
+                    <select name="machine_staff" id="machine_staff" style="font-size: 18px">
+                        <option value="1">挡车-刘永琴</option>
+                        <option value="2">挡车-孙丹丹</option>
+                        <option value="3">挡车-万小兰</option>
+                        <option value="4">QC-姚张丽</option>
+                        <option value="5">其他</option>
+                        <option value="6">测试-</option>
+                </select>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6" style="width: 100%; height: 600px;margin-bottom:40px">
+                        <div style="width: 100%;text-align: left;height: 30px;font-size: 24px; background-color: #d8fac9;">生产信息</div>
+                        <div style="width: 100%;text-align: left;height: 40px; border-bottom: #ee5424 1px dashed">
+                            <label for="machine_id" style="font-size: 24px; color: #ee5424">织机:</label>
+                            <input type="checkbox" class="form-check-input" style='margin-left:15px; margin-top:15px' id='id_all' value="">
+                            <label for="id_all" style="font-size: 18px; color: #ee532481; margin-left:35px">显示全部</label>
+                            <select name="machine_id" id="machine_id" style="float: right;font-size: 18px">
+                                <option value="">请选择机台号</option>
+                            </select>
+                        </div>
+                        <div style="width: 100%;text-align: left;height: 40px; border-bottom: #ee5424 1px dashed">
+                            <label for="machine_style" style="font-size: 24px; color: #ee5424">款号:</label>
+                            <input type="text" id="machine_style" name="machine_style" style="float: right;font-size: 18px">
+                        </div>
+                        <div style="width: 100%;text-align: left;height: 40px; border-bottom: #ee5424 1px dashed">
+                            <label for="machine_color" style="font-size: 24px; color: #ee5424">颜色:</label>
+                            <input type="text" id="machine_color" name="machine_color" style="float: right;font-size: 18px">
+                        </div>
+
+                        <div style="width: 100%;text-align: left;height: 40px; border-bottom: #ee5424 1px dashed">
+                            <label for="machine_size" style="font-size: 24px; color: #ee5424">尺寸:</label>
+                            <input type="text" id="machine_size" name="machine_size" style="float: right;font-size: 18px">
+                        </div>
+                        <div style="width: 100%;text-align: left;height: 30px;font-size: 24px; background-color: #d8fac9;">次品信息（只）</div>
+                        <div style="width: 100%;text-align: left;height: 40px; border-bottom:  1px solid">
+                            <label class="li_toeHole" for="machine_toeHoe" style="font-size: 24px; color: #e5deb5">破洞:</label>
+                            <input type="number" pattern="\d*" id="machine_toeHoe" name="machine_toeHoe" style="float: right;font-size: 18px" placeholder="0">
+                        </div>
+                        <div style="width: 100%;text-align: left;height: 40px; border-bottom: 1px solid">
+                            <label class="li_brokenNDL" for="machine_brokenNDL" style="font-size: 24px;  color: #e5deb5">断针:</label>
+                            <input type="number" pattern="\d*" id="machine_brokenNDL" name="machine_brokenNDL" style="float: right;font-size: 18px " placeholder="0">
+                        </div>
+                        <div style="width: 100%;text-align: left;height: 40px; border-bottom: 1px solid">
+                            <label class="li_missYarn" for="machine_Yarn" style="font-size: 24px;  color: #e5deb5">断纱:</label>
+                            <input type="number" pattern="\d*" id="machine_Yarn" name="machine_Yarn" style="float: right;font-size: 18px" placeholder="0">
+                        </div>
+                        <div style="width: 100%;text-align: left;height: 40px; border-bottom: 1px solid">
+                            <label class="li_fanYarn" for="machine_fan_Yarn" style="font-size: 24px;  color: #e5deb5">返纱:</label>
+                            <input type="number" pattern="\d*" id="machine_fan_Yarn" name="machine_fan_Yarn" style="float: right;font-size: 18px" placeholder="0">
+                        </div>
+                        <div style="width: 100%;text-align: left;height: 40px; border-bottom: 1px solid">
+                            <label class="li_LOGO" for="machine_logo" style="font-size: 24px; color: #e5deb5 ">Logo标记:</label>
+                            <input type="number" pattern="\d*" id="machine_logo" name="machine_logo" style="float: right;font-size: 18px;width:140px" placeholder="0">
+                        </div>
+                        <div style="width: 100%;text-align: left;height: 40px; border-bottom:  1px solid">
+                            <label class="li_Dirty" for="machine_dirty" style="font-size: 24px;  color: #e5deb5">污渍:</label>
+                            <input type="number" pattern="\d*" id="machine_dirty" name="machine_dirty" style="float: right;font-size: 18px" placeholder="0">
+                        </div>
+                        <div style="width: 100%;text-align: left;height: 40px; border-bottom: 1px solid">
+                            <label class="li_other" for="machine_other" style="font-size: 24px; color: #e5deb5 ">其他:</label>
+                            <input type="number" pattern="\d*" id="machine_other" name="machine_other" style="float: right;font-size: 18px" placeholder="0">
+                        </div>
+                        <input type="text" id="remark" style="width:100%;height:40px;font-size: 12px" placeholder="请输入备注信息">
+                        <button type="button" class="btn btn-warning" onclick="knitPQC_qc()">完成检测</button>
+
+
+                    </div>
+                    <div class="col-sm-6" style="width: 100%; height: 600px; border: #0e84f8 1px solid">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p style="color: #00b21e;">质量预检统计</p>
+                            </div>
+                            <div class="col-sm-3">
+                                <input readonly="readonly" class="custom-select" type="text" id="summary_k_time" style="background-color: #f9fcfc;color: #0c0a0a;">
+                            </div>
+                            <div class="col-sm-3">
+                                <select id="summary_k_time_shift" class="custom-select" style="background-color: #f9fcfc;color: #0c0a0a;">
+                                <option value='08:00:00'>08:00:00</option>
+                                <option value='20:00:00'>20:00:00</option>
+                            </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <button type="button" class=" btn btn-primary btn-sm" onclick="knit_pqc_enquire()">查询</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12" style="width: 100%; height: 30px;" id="legend"></div>
+                            <div id='list_1' class="col-sm-12" ; style=" margin-top: 1%;width: 100%; height: 100px;"></div>
+                            <div id='list_2' class="col-sm-12" ; style=" margin-top: 1%;width: 100%; height: 100px;"></div>
+                            <div id='list_3' class="col-sm-12" ; style=" margin-top: 1%;width: 100%; height: 100px;"></div>
+                            <div id='list_4' class="col-sm-12" ; style=" margin-top: 1%;width: 100%; height: 100px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <hr style="background-color: #cd23b2">
+                <p style="text-align: center">预检测数据库查询</p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">日期</th>
+                            <th scope="col">姓名</th>
+                            <th scope="col">织机</th>
+                            <th scope="col">款号</th>
+                            <th scope="col">颜色</th>
+                            <th scope="col">尺寸</th>
+                            <th scope="col">破洞</th>
+                            <th scope="col">断针</th>
+                            <th scope="col">断纱</th>
+                            <th scope="col">返纱</th>
+                            <th scope="col">商标</th>
+                            <th scope="col">污渍</th>
+                            <th scope="col">其他</th>
+                            <th scope="col">备注</th>
+                        </tr>
+                    </thead>
+                    <tbody id="error_summary_table" style=" cursor: pointer;">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+
+    <script type="text/javascript" src="../assets/js/library/echarts.js"></script>
+    <link rel="Stylesheet" href="../assets/ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+    <script src="../assets/ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
+    <script src="../assets/ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
+    <script src="../assets/d3js.org/d3.v3.min.js"></script>
+    <script type="text/javascript" src="../assets/js/vis/qc_summary/knit_pqc.js?v=20201103-3"></script>
+
+</body>
+<script>
+    var machineAndStyle;
+    $(function() {
+        updateMachineAndStyle();
+    })
+
+
+    function updateMachineAndStyle() {
+        $.ajax({
+            url: '../assets/php/machine_style.php',
+            type: 'POST',
+            data: {},
+            success: function(data) {
+                machineAndStyle = JSON.parse(data);
+                var selectbox = $("#machine_id"); //cache our slectbox, so jquery doesn't have to look for it in every loop.
+                var cnt = -1;
+                selectbox.empty();
+                for (let i = 2; i < 91; i++) {
+                    if (i == 31) continue;
+                    cnt++;
+                    console.log(i + "," + cnt + "," + machineAndStyle[cnt].style);
+
+                    if (machineAndStyle[cnt].style == 'xx' && !$('#id_all')[0].checked) continue;
+                    selectbox.append($('<option>').text(i).val(i));
+                }
+                updateStyle();
+            },
+            error: function() {
+                alert('Error loading XML document');
+            }
+        });
+    }
+
+    function updateStyle() {
+        let machine_data = machineAndStyle.filter(d => d['machine'].toString() == $('#machine_id').val());
+        if (machine_data.length > 0) {
+            document.getElementById('machine_style').value = machine_data[0]['style'];
+            document.getElementById('machine_color').value = machine_data[0]['color'];
+            document.getElementById('machine_size').value = machine_data[0]['size'];
+        } else {
+            document.getElementById('machine_style').value = "";
+            document.getElementById('machine_color').value = "";
+            document.getElementById('machine_size').value = "";
+        }
+        console.log(machineAndStyle);
+    }
+
+    ///add machine id to select box
+
+    //read txt file for machine information
+    $('#machine_id').on('change', updateStyle);
+
+    $('#id_all').on('change', function() {
+        updateMachineAndStyle();
+    });
+
+    //date picker
+    $(function() {
+        $('#k_time').datepicker();
+        $('#summary_k_time').datepicker();
+    });
+</script>
+
+</html>

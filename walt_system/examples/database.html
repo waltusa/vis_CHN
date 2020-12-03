@@ -1,0 +1,381 @@
+<!--
+=========================================================
+* * Black Dashboard - v1.0.1
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/black-dashboard
+* Copyright 2019 Creative Tim (https://www.creative-tim.com)
+
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <title>
+        数据库查询 - WaltCN Data Visualization System
+    </title>
+    <!--     Fonts and icons     -->
+    <!-- Nucleo Icons -->
+    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="../assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="../assets/css/StyleSheet.css">
+
+    <style>
+        .tableError {
+            overflow-y: auto;
+            height: 165px;
+        }
+        
+        .tableError td {
+            border: 1px solid #ccc;
+        }
+        
+        .tableError thead th {
+            position: sticky;
+            top: 0;
+        }
+        
+        .table_product {
+            overflow-y: auto;
+            height: 130px;
+        }
+        .table_product tr:hover{
+            color: #0a0c0d;
+            background-color: #f8dfb5;
+        }
+        .table_product td {
+            border: 1px solid #ccc;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td {
+            padding: 3px 16px;
+        }
+    </style>
+
+</head>
+
+<body class="">
+    <div class="wrapper">
+
+        <div class="sidebar">
+            <!--
+          Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
+      -->
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="" class="simple-text logo-mini">
+                    LLC
+                </a>
+                    <a href="https://waltusa.us/" class="simple-text logo-normal">
+                     华尔集团
+                </a>
+                </div>
+                <ul class="nav">
+                    <li>
+                        <a href="./dashboard.html">
+                            <i class="tim-icons icon-chart-pie-36"></i>
+                            <p>实时数据</p>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="./database.html">
+                            <i class="tim-icons icon-laptop"></i>
+                            <p>数据库查询</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./knitting_PQC.html">
+                            <i class="tim-icons icon-coins"></i>
+                            <p>质量预检</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./NonSkid.html">
+                            <i class="tim-icons icon-user-run"></i>
+                            <p>防滑质检(暂时不用)</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./Paring.html">
+                            <i class="tim-icons icon-zoom-split"></i>
+                            <p>配袜质检(暂时不用)</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./Package.html">
+                            <i class="tim-icons icon-gift-2"></i>
+                            <p>包装质检(暂时不用)</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./icons.html">
+                            <i class="tim-icons icon-atom"></i>
+                            <p>Icons</p>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p style="text-align: left;color: #26caa8;font-size: 1.0vw">查询系统 <span id="times"></span></p>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="start_machine" placeholder="起始机器">
+                            </div>
+
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" id="end_machine" placeholder="末位机器">
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-2">
+                        <input readonly="readonly" class="custom-select" type="text" id="db_time" style="background-color: #f9fcfc;color: #0c0a0a;font-size: 1vw">
+
+                    </div>
+                    <div class="col-md-2">
+                        <select id="db_shift" class="custom-select" style="background-color: #f9fcfc;color: #0c0a0a;font-size: 0.8vw">
+                        <option value='08:00:00'>08:00:00</option>
+                        <option value='20:00:00'>20:00:00</option>
+                    </select>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-warning" onclick="db_enquire()">查询</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="card card-chart" style="width: 100%; height: 330px">
+                            <div class="card-body">
+                                <span style="color: #a9e20e;font-size: 1.5vh">机器状态:<span id='sum_ae' ; style="color: #ecc6ba; font-size: 0.7vw"></span></span>
+                                <div id='machine_summary' ; style="width: 100%; height: 180px"></div>
+                                <div id='sum_mn' ; style="color: #ecc6ba; font-size: 0.7vw"></div>
+                                <div id='sum_po' ; style="color: #ecc6ba; font-size: 0.7vw"></div>
+                                <div id='defect' ; style="color: #ecc6ba; font-size: 0.7vw">次品率前5的机器： </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" ;>
+                        <div class="card card-chart" style="width: 100%; height: 330px">
+                            <div class="card-body">
+                                <span id='product_title' ; style="color: #17c3db;font-size: 1.5vh">产量统计</span>
+                                <div id='production_summary' ; class="chart-area" style="height: 140px">
+                                </div>
+
+                                <div class="table_product" id="db_style_table">
+                                    <table>
+                                        <thead>
+                                            <tr style="font-size: 1.2vh">
+                                                <th scope="col" style="color: #2254b8">产品型号</th>
+                                                <th scope="col" style="color: #18c657">产量(只)</th>
+                                                <th scope="col" style="color: #22cab7">机器数</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="db_style_table_body" style=" color: #36b8aa;font-size: 1.2vh">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-chart" style="width: 100%; height: 330px">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="tableError" id="error_table">
+                                            <table>
+                                                <thead>
+                                                    <tr style="color: #3bf607; font-size: 0.7vw">
+                                                        <th scope="col">排名</th>
+                                                        <th scope="col">故障</th>
+                                                        <th scope="col">描述</th>
+                                                        <th scope="col">次数</th>
+                                                        <th scope="col">百分比</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="error_summary_table" style=" color: #d21cb4; cursor: pointer;">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div style="width: 100%; height: 140px;" ; id='error_time'></div>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div style="width: 100%; height: 140px;" ; id='error_machine'></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md">
+                        <div class="card card-chart">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div id='efficiency_distribute' class="col-md-10" style="width: 100%; height: 180px">
+
+                                    </div>
+                                    <div id='select_error_chart' class="col-md-2" style="width: 100%; height: 180px">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="card card-chart" style="width: 100%; height: 230px">
+                            <div class="card-body">
+                                <span style="color: #ee2a30;font-size: 1.5vh">机器信息: <span id="dbm_id"></span></span>
+                                <p></p>
+                                <p style="font-size: 0.8vw">机器生产效率：<span id="dbm_we"></span></p>
+                                <p style="font-size: 0.8vw">机器开机效率：<span id="dbm_te"></span></p>
+                                <p style="font-size: 0.8vw">机器生产型号：<span id="dbm_s"></span></p>
+                                <p style="font-size: 0.8vw">机器生产总量：<span id="dbm_p"></span></p>
+                                <p style="font-size: 0.8vw">机器故障总量：<span id="dbm_e"></span></p>
+                                <p style="font-size: 0.8vw">机器次品总量：<span id="dbm_d"></span></p>
+                                <p style="color:#ee2a30; font-size: 0.8vw">机器净成品量：<span id="dbm_total"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="card card-chart" style="width: 100%; height: 230px">
+                            <div class="card-body">
+                                <span style="color: #e0591b;font-size: 1.5vh">质量预检</span>
+                                <p style="font-size: 0.8vw">预检次数：<span id="dbpqc_count"></span></p>
+                                <p style="font-size: 0.8vw">预检次品(不含污渍)：<span id="dbpqc_defects_counts"></span></p>
+                                <p style="font-size: 0.8vw">预检污渍：<span id="dbpqc_dirty_defects_counts"></span></p>
+                                <div style="width: 100%; height: 200px" id='dbpqc_defects'></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md" ;>
+                        <div class="card card-chart" style="width: 100%; height: 230px">
+                            <div class="card-body">
+                                <span style="color: #d9d61b;font-size: 1.5vh">配袜质检</span>
+                                <p style="font-size: 0.8vw">质检合格(含污渍)：<span id="dbpqc_paring_qualified_counts"></span></p>
+                                <p style="font-size: 0.8vw">质检次品率：<span id="dbpqc_paring_defects_counts"></span></p>
+                                <div style="width: 100%; height: 200px" id='dbpqc_paring_defects'></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="card card-chart" style="width: 100%; height: 230px">
+                            <div class="card-body">
+                                <span style="color: #6ad06f;font-size: 1.5vh">防滑质检</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="card card-chart" style="width: 100%; height: 230px">
+                            <div class="card-body">
+                                <span style="color: #2182cb;font-size: 1.5vh">包装质检</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <link rel="Stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
+    <script type="text/javascript" src="../assets/js/library/echarts.js"></script>
+    <<script src="https://d3js.org/d3.v3.min.js"></script>
+        <script type="text/javascript" src='../assets/js/vis/Database_Enquire/db_main.js'></script>
+</body>
+
+<script type="text/javascript">
+    $(function() {
+        $('#db_time').datepicker();
+    });
+
+    function db_enquire() {
+        document.getElementById('dbm_id').innerText = '所有'
+        let date = $('#db_time').val();
+        let shift = $('#db_shift').val();
+        let start_machine = $('#start_machine').val();
+        let end_machine = $('#end_machine').val();
+
+        if (!(start_machine && end_machine)) {
+            alert('请选择展示的机器范围，建议范围小于45台')
+        } else {
+            if (date && shift) {
+                $.ajax({
+                    url: '../assets/php/data_load.php',
+                    type: 'POST',
+                    data: {
+                        start_date: date,
+                        start_time: shift,
+                        start_machine: start_machine,
+                        end_machine: end_machine
+                    },
+                    success: function(data) {
+                        let new_data = JSON.parse(data);
+                        console.log(new_data)
+
+                        machine_summary(new_data);
+                        db_machine_production(new_data['product']);
+                        error_summary(new_data['error']);
+                        top_10errors_machine(new_data['error']);
+                        machine_error_time_line(new_data['error']);
+                        machine_efficiency_distribute(new_data);
+                        select_error_machines(new_data['error'], ' (所有)');
+                        machine_details_summary(new_data['knit_pqc'], new_data['paring'])
+                    },
+                    error: function() {
+
+                        alert('Error loading XML document');
+                    }
+                });
+            } else {
+                alert('请选择正确的起始时间！')
+            }
+        }
+
+
+
+    }
+</script>
+
+</html>
